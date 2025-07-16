@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mans Profils - Mana Fanfic Vietne</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-amber-50 text-stone-800;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-4" style="background-image: url('colour-ge36531a2f_1920.jpg'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-4 flex justify-between items-center flex-wrap">
+            <h1 class="text-3xl font-bold text-white">
+                <a href="index.html" class="hover:text-orange-200 transition-colors duration-300">Mana Fanfic Vietne</a>
+            </h1>
+            <div class="flex items-center space-x-4 md:space-x-6 flex-grow md:flex-grow-0 justify-end md:justify-start">
+                <div class="relative w-full md:w-auto max-w-xs order-3 md:order-none mt-4 md:mt-0">
+                    <input type="text" id="search-input-profile" placeholder="Meklēt..." class="w-full pl-10 pr-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <button id="mobile-menu-button-profile" class="md:hidden p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500 order-1 md:order-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div class="relative order-2 md:order-none">
+                    <button id="user-menu-button-profile" class="flex items-center space-x-2 p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500 hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="hidden md:inline font-semibold ml-2">Lietotājs</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="user-menu-dropdown-profile" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                        <a href="user-profile.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mans Profils</a>
+                        <a href="my-stories.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mani Stāsti</a>
+                        <hr class="border-stone-200 my-1">
+                        <a href="#" id="logout-button-profile" class="block px-4 py-2 text-red-600 hover:bg-red-50">Izrakstīties</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="main-nav-profile" class="hidden md:flex flex-col md:flex-row md:items-center w-full md:w-auto mt-6 md:mt-0 order-4 md:order-none">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Sākums</a></li>
+                    <li><a href="art.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Māksla</a></li>
+                    <li><a href="archive.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Arhīvs</a></li>
+                    <li><a href="forum.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Forums</a></li>
+                    <li><a href="about-us.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Par mums</a></li> <!-- UPDATED LINK -->
+                    <li id="login-nav-item"><a href="auth.html?mode=login" class="block px-4 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Pieteikties</a></li>
+                    <li id="register-nav-item"><a href="auth.html?mode=register" class="block px-4 py-2 rounded-md border border-orange-700 text-orange-700 hover:bg-orange-50 transition-colors duration-300 shadow-md">Reģistrēties</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8">
+        <div class="container mx-auto px-4 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-center text-stone-800 mb-6 pb-2 relative">
+                Mans Profils
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>
+            </h2>
+
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-stone-100 p-6 rounded-lg shadow-inner mb-6">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <img id="profile-picture" src="https://placehold.co/100x100/e7e5e4/78716c?text=Profils" alt="Profila bilde" class="w-24 h-24 rounded-full object-cover border-4 border-orange-200 shadow-md">
+                        <div>
+                            <h3 id="profile-display-name" class="text-2xl font-bold text-stone-800">Lietotājs</h3>
+                            <p id="profile-email" class="text-stone-600">epasts@piemers.com</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="display-name" class="block text-sm font-medium text-stone-700 mb-1">Parādāmais vārds</label>
+                            <input type="text" id="display-name" class="w-full px-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-white shadow-sm" placeholder="Jūsu parādāmais vārds">
+                        </div>
+                        <div>
+                            <label for="bio" class="block text-sm font-medium text-stone-700 mb-1">Biogrāfija</label>
+                            <textarea id="bio" rows="4" class="w-full px-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-white shadow-sm" placeholder="Pastāstiet par sevi..."></textarea>
+                        </div>
+                        <div>
+                            <label for="profile-image-url" class="block text-sm font-medium text-stone-700 mb-1">Profila attēla URL</label>
+                            <input type="url" id="profile-image-url" class="w-full px-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-white shadow-sm" placeholder="https://example.com/your-image.jpg">
+                        </div>
+                    </div>
+
+                    <button id="update-profile-button" class="mt-6 w-full px-5 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Atjaunināt profilu</button>
+                    <p id="profile-update-status" class="mt-3 text-center text-sm hidden"></p>
+                </div>
+
+                <div class="bg-stone-100 p-6 rounded-lg shadow-inner mb-6">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-4">Paroles maiņa</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="current-password" class="block text-sm font-medium text-stone-700 mb-1">Pašreizējā parole</label>
+                            <input type="password" id="current-password" class="w-full px-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-white shadow-sm" placeholder="Ievadiet pašreizējo paroli">
+                        </div>
+                        <div>
+                            <label for="new-password" class="block text-sm font-medium text-stone-700 mb-1">Jaunā parole</label>
+                            <input type="password" id="new-password" class="w-full px-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-white shadow-sm" placeholder="Ievadiet jauno paroli">
+                        </div>
+                        <div>
+                            <label for="confirm-new-password" class="block text-sm font-medium text-stone-700 mb-1">Apstiprināt jauno paroli</label>
+                            <input type="password" id="confirm-new-password" class="w-full px-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-white shadow-sm" placeholder="Atkārtojiet jauno paroli">
+                        </div>
+                    </div>
+                    <button id="change-password-button" class="mt-6 w-full px-5 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Mainīt paroli</button>
+                    <p id="password-change-status" class="mt-3 text-center text-sm hidden"></p>
+                </div>
+
+                <div class="bg-stone-100 p-6 rounded-lg shadow-inner">
+                    <h3 class="text-xl font-semibold text-red-700 mb-4">Bīstamā zona</h3>
+                    <p class="text-stone-700 mb-4">Šī darbība ir neatgriezeniska. Dzēšot savu kontu, tiks neatgriezeniski dzēsti visi jūsu dati.</p>
+                    <button id="delete-account-button" class="w-full px-5 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors duration-300 shadow-md">Dzēst kontu</button>
+                    <p id="delete-account-status" class="mt-3 text-center text-sm hidden"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-stone-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0">&copy; 2025 Mana Fanfic Vietne. Visas tiesības aizsargātas.</p>
+            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm">
+                <li><a href="privacy-policy.html" class="hover:text-orange-300 transition-colors duration-300">Konfidencialitātes politika</a></li>
+                <li><a href="terms-of-service.html" class="hover:text-orange-300 transition-colors duration-300">Lietošanas noteikumi</a></li>
+                <li><a href="contact.html" class="hover:text-orange-300 transition-colors duration-300">Kontakti</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs and Initialization -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signOut, signInAnonymously, signInWithCustomToken, onAuthStateChanged, updateProfile, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider, deleteUser } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables for Firebase instances and user ID
+        let app;
+        let db;
+        let auth;
+        let userId = null;
+        let isAuthReady = false; // Flag to indicate if auth state is resolved
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // Function to load user profile data
+        async function loadUserProfile() {
+            if (!db || !userId || !isAuthReady) {
+                console.warn("Firestore, lietotāja ID vai autentifikācija nav gatava. Nevar ielādēt profila datus.");
+                return;
+            }
+
+            const userDocRef = doc(db, `artifacts/${appId}/users/${userId}/profile`, 'public'); // User-specific profile data
+            try {
+                const docSnap = await getDoc(userDocRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('profile-display-name').textContent = data.displayName || 'Lietotājs';
+                    document.getElementById('profile-email').textContent = auth.currentUser?.email || 'Nav e-pasta';
+                    document.getElementById('profile-picture').src = data.photoURL || 'https://placehold.co/100x100/e7e5e4/78716c?text=Profils';
+                    document.getElementById('display-name').value = data.displayName || '';
+                    document.getElementById('bio').value = data.bio || '';
+                    document.getElementById('profile-image-url').value = data.photoURL || '';
+                } else {
+                    console.log("Nav profila datu priekš lietotāja:", userId);
+                    // Populate with current auth data if no custom profile exists
+                    document.getElementById('profile-display-name').textContent = auth.currentUser?.displayName || 'Lietotājs';
+                    document.getElementById('profile-email').textContent = auth.currentUser?.email || 'Nav e-pasta';
+                    document.getElementById('profile-picture').src = auth.currentUser?.photoURL || 'https://placehold.co/100x100/e7e5e4/78716c?text=Profils';
+                    document.getElementById('display-name').value = auth.currentUser?.displayName || '';
+                    document.getElementById('profile-image-url').value = auth.currentUser?.photoURL || '';
+                }
+            } catch (error) {
+                console.error("Kļūda ielādējot profila datus:", error);
+            }
+        }
+
+        // Function to update user profile data
+        async function updateProfileData() {
+            const displayName = document.getElementById('display-name').value.trim();
+            const bio = document.getElementById('bio').value.trim();
+            const photoURL = document.getElementById('profile-image-url').value.trim();
+            const statusMessage = document.getElementById('profile-update-status');
+            statusMessage.classList.add('hidden'); // Hide previous messages
+
+            if (!auth.currentUser) {
+                statusMessage.textContent = "Lūdzu, piesakieties, lai atjauninātu profilu.";
+                statusMessage.classList.remove('hidden');
+                statusMessage.classList.remove('text-green-600', 'text-red-600');
+                statusMessage.classList.add('text-yellow-600');
+                return;
+            }
+
+            try {
+                // Update Firebase Auth profile
+                await updateProfile(auth.currentUser, {
+                    displayName: displayName || null, // Set to null if empty to clear
+                    photoURL: photoURL || null // Set to null if empty to clear
+                });
+
+                // Update Firestore profile data
+                const userDocRef = doc(db, `artifacts/${appId}/users/${userId}/profile`, 'public');
+                await setDoc(userDocRef, {
+                    displayName: displayName,
+                    bio: bio,
+                    photoURL: photoURL,
+                    lastUpdated: new Date()
+                }, { merge: true }); // Merge to update existing fields without overwriting others
+
+                // Update displayed profile info immediately
+                document.getElementById('profile-display-name').textContent = displayName || 'Lietotājs';
+                document.getElementById('profile-picture').src = photoURL || 'https://placehold.co/100x100/e7e5e4/78716c?text=Profils';
+
+                statusMessage.textContent = "Profils veiksmīgi atjaunināts!";
+                statusMessage.classList.remove('hidden', 'text-red-600', 'text-yellow-600');
+                statusMessage.classList.add('text-green-600');
+            } catch (error) {
+                console.error("Kļūda atjauninot profilu:", error);
+                statusMessage.textContent = `Profila atjaunināšana neizdevās: ${error.message}`;
+                statusMessage.classList.remove('hidden', 'text-green-600', 'text-yellow-600');
+                statusMessage.classList.add('text-red-600');
+            }
+        }
+
+        // Function to change password
+        async function changePassword() {
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmNewPassword = document.getElementById('confirm-new-password').value;
+            const statusMessage = document.getElementById('password-change-status');
+            statusMessage.classList.add('hidden'); // Hide previous messages
+
+            if (!auth.currentUser) {
+                statusMessage.textContent = "Lūdzu, piesakieties, lai mainītu paroli.";
+                statusMessage.classList.remove('hidden');
+                statusMessage.classList.remove('text-green-600', 'text-red-600');
+                statusMessage.classList.add('text-yellow-600');
+                return;
+            }
+            if (newPassword !== confirmNewPassword) {
+                statusMessage.textContent = "Jaunā parole un tās apstiprinājums nesakrīt.";
+                statusMessage.classList.remove('hidden', 'text-green-600', 'text-yellow-600');
+                statusMessage.classList.add('text-red-600');
+                return;
+            }
+            if (newPassword.length < 6) {
+                statusMessage.textContent = "Parolei jābūt vismaz 6 rakstzīmes garai.";
+                statusMessage.classList.remove('hidden', 'text-green-600', 'text-yellow-600');
+                statusMessage.classList.add('text-red-600');
+                return;
+            }
+
+            try {
+                // Reauthenticate user before changing password
+                const credential = EmailAuthProvider.credential(auth.currentUser.email, currentPassword);
+                await reauthenticateWithCredential(auth.currentUser, credential);
+
+                await updatePassword(auth.currentUser, newPassword);
+                statusMessage.textContent = "Parole veiksmīgi nomainīta!";
+                statusMessage.classList.remove('hidden', 'text-red-600', 'text-yellow-600');
+                statusMessage.classList.add('text-green-600');
+                // Clear password fields
+                document.getElementById('current-password').value = '';
+                document.getElementById('new-password').value = '';
+                document.getElementById('confirm-new-password').value = '';
+            } catch (error) {
+                console.error("Kļūda mainot paroli:", error);
+                statusMessage.textContent = `Paroles maiņa neizdevās: ${error.message}`;
+                statusMessage.classList.remove('hidden', 'text-green-600', 'text-yellow-600');
+                statusMessage.classList.add('text-red-600');
+            }
+        }
+
+        // Function to delete user account
+        async function deleteUserAccount() {
+            const statusMessage = document.getElementById('delete-account-status');
+            statusMessage.classList.add('hidden'); // Hide previous messages
+
+            if (!auth.currentUser) {
+                statusMessage.textContent = "Lūdzu, piesakieties, lai dzēstu kontu.";
+                statusMessage.classList.remove('hidden');
+                statusMessage.classList.remove('text-green-600', 'text-red-600');
+                statusMessage.classList.add('text-yellow-600');
+                return;
+            }
+
+            // A more robust confirmation should be implemented here, e.g., a custom modal
+            const confirmDelete = window.confirm("Vai tiešām vēlaties dzēst savu kontu? Šo darbību nevar atsaukt!");
+            if (!confirmDelete) {
+                statusMessage.textContent = "Konta dzēšana atcelta.";
+                statusMessage.classList.remove('hidden', 'text-green-600', 'text-red-600');
+                statusMessage.classList.add('text-yellow-600');
+                return;
+            }
+
+            try {
+                // For security, Firebase usually requires re-authentication before deleting an account.
+                // If a user has recently signed in, this might not be strictly necessary,
+                // but it's good practice to re-authenticate or prompt for current password.
+                // For simplicity, we'll omit re-authentication prompt here, but in a real app,
+                // you'd typically ask for the current password again.
+
+                await deleteUser(auth.currentUser);
+
+                // Optionally, delete user-specific data from Firestore if needed
+                // Note: Firestore security rules should also enforce this based on auth.uid
+                // Example: await deleteDoc(doc(db, `artifacts/${appId}/users/${userId}/profile`, 'public'));
+
+                statusMessage.textContent = "Jūsu konts ir veiksmīgi dzēsts.";
+                statusMessage.classList.remove('hidden', 'text-red-600', 'text-yellow-600');
+                statusMessage.classList.add('text-green-600');
+
+                // Redirect to homepage or login page after successful deletion
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } catch (error) {
+                console.error("Kļūda dzēšot kontu:", error);
+                statusMessage.textContent = `Konta dzēšana neizdevās: ${error.message}`;
+                statusMessage.classList.remove('hidden', 'text-green-600', 'text-yellow-600');
+                statusMessage.classList.add('text-red-600');
+            }
+        }
+
+
+        // Firebase Initialization and Auth State handling
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+
+                if (Object.keys(firebaseConfig).length === 0) {
+                    console.error("Firebase konfigurācija trūkst. Lūdzu, nodrošiniet __firebase_config.");
+                    return;
+                }
+
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Mobile Menu Toggle
+                const mobileMenuButton = document.getElementById('mobile-menu-button-profile');
+                const mainNav = document.getElementById('main-nav-profile');
+                if (mobileMenuButton && mainNav) {
+                    mobileMenuButton.addEventListener('click', function() {
+                        mainNav.classList.toggle('hidden');
+                        mainNav.classList.toggle('flex');
+                        mainNav.classList.toggle('flex-col');
+                    });
+                     mainNav.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            if (window.innerWidth < 768) {
+                                mainNav.classList.add('hidden');
+                                mainNav.classList.remove('flex');
+                                mainNav.classList.remove('flex-col');
+                            }
+                        });
+                    });
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= 768) {
+                            mainNav.classList.remove('hidden');
+                            mainNav.classList.add('flex');
+                            mainNav.classList.remove('flex-col');
+                        } else {
+                            mainNav.classList.add('hidden');
+                            mainNav.classList.remove('flex');
+                            mainNav.classList.remove('flex-col');
+                        }
+                    });
+                }
+
+                // User Profile Dropdown
+                const userMenuButton = document.getElementById('user-menu-button-profile');
+                const userMenuDropdown = document.getElementById('user-menu-dropdown-profile');
+                if (userMenuButton && userMenuDropdown) {
+                    userMenuButton.addEventListener('click', function(event) {
+                        event.stopPropagation();
+                        userMenuDropdown.classList.toggle('hidden');
+                    });
+                    document.addEventListener('click', function(event) {
+                        if (!userMenuButton.contains(event.target) && !userMenuDropdown.contains(event.target)) {
+                            userMenuDropdown.classList.add('hidden');
+                        }
+                    });
+                }
+
+                const loginNavItem = document.getElementById('login-nav-item');
+                const registerNavItem = document.getElementById('register-nav-item');
+                const logoutButton = document.getElementById('logout-button-profile'); // Get the logout button
+
+                // Update UI based on authentication state and trigger profile loading
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        console.log("Authenticated with Firebase UID:", userId);
+                        if (loginNavItem) loginNavItem.classList.add('hidden');
+                        if (registerNavItem) registerNavItem.classList.add('hidden');
+                        if (userMenuButton) userMenuButton.classList.remove('hidden'); // Show user menu button
+                        loadUserProfile(); // Load profile data after user is authenticated
+                    } else {
+                        // Sign in anonymously if no user is logged in
+                        try {
+                            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null; // Get initialAuthToken here
+                            if (initialAuthToken) {
+                                await signInWithCustomToken(auth, initialAuthToken);
+                                userId = auth.currentUser.uid;
+                                console.log("Signed in with custom token. UID:", userId);
+                            } else {
+                                await signInAnonymously(auth);
+                                userId = auth.currentUser.uid; // Still get a UID even for anonymous
+                                console.log("Signed in anonymously. UID:", userId);
+                            }
+                        } catch (error) {
+                            console.error("Firebase autentifikācijas kļūda:", error);
+                        }
+                        // Always ensure UI reflects authentication state after attempting sign-in
+                        if (loginNavItem) loginNavItem.classList.remove('hidden');
+                        if (registerNavItem) registerNavItem.classList.remove('hidden');
+                        if (userMenuButton) userMenuButton.classList.add('hidden'); // Hide until authenticated properly
+                        loadUserProfile(); // Attempt to load even if anonymous (might show default)
+                    }
+                    isAuthReady = true; // Auth state is resolved
+                });
+
+                // Handle logout
+                if (logoutButton) {
+                    logoutButton.addEventListener('click', async function(event) {
+                        event.preventDefault();
+                        try {
+                            await signOut(auth);
+                            console.log('Izrakstīšanās veiksmīga: Jūs esat veiksmīgi izrakstījies.');
+                            // Optionally redirect or refresh page
+                            setTimeout(() => {
+                                window.location.href = 'index.html'; // Or 'auth.html?mode=login'
+                            }, 500);
+                        } catch (error) {
+                            console.error("Izrakstīšanās kļūda:", error);
+                        }
+                    });
+                }
+
+                // Attach event listeners to profile buttons
+                document.getElementById('update-profile-button').addEventListener('click', updateProfileData);
+                document.getElementById('change-password-button').addEventListener('click', changePassword);
+                document.getElementById('delete-account-button').addEventListener('click', deleteUserAccount);
+
+                // Basic search functionality (client-side only for this page)
+                const searchInput = document.getElementById('search-input-profile');
+                if (searchInput) {
+                    searchInput.addEventListener('keyup', function() {
+                        const searchTerm = searchInput.value.toLowerCase();
+                        // This page doesn't have much dynamic content to search,
+                        // but you could expand this if more elements become searchable.
+                        // For now, it's just a placeholder for consistency.
+                        console.log("Meklēšana profilā:", searchTerm);
+                    });
+                }
+
+
+            } catch (error) {
+                console.error("Neizdevās inicializēt Firebase:", error);
+            }
+        });
+    </script>
+</body>
+</html>

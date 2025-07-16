@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pieteikties / Reģistrēties - Mana Fanfic Vietne</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ārējie kopējie stili -->
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-amber-50 text-stone-800;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Custom styles for input fields to make them more visible */
+        .auth-input {
+            /* Changed background to white and added a stronger shadow */
+            @apply w-full px-4 py-2 rounded-md border-2 border-amber-700 focus:outline-none focus:ring-2 focus:ring-orange-500 text-stone-700 bg-white shadow-md;
+        }
+        /* Styles for the custom message box */
+        .message-box {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none; /* Hidden by default */
+            text-align: center;
+            font-weight: 500;
+            animation: fadeOut 5s forwards; /* Animation to show and then fade out */
+        }
+        .message-box.success {
+            background-color: #d1fae5; /* green-100 */
+            color: #065f46; /* green-700 */
+            border: 1px solid #34d399; /* green-400 */
+        }
+        .message-box.error {
+            background-color: #fee2e2; /* red-100 */
+            color: #991b1b; /* red-700 */
+            border: 1px solid #ef4444; /* red-500 */
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 0; display: block; }
+            10% { opacity: 1; display: block; }
+            90% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- Header Section (reused for consistency) -->
+    <header class="bg-white shadow-sm py-4" style="background-image: url('colour-ge36531a2f_1920.jpg'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-4 flex justify-between items-center flex-wrap">
+            <h1 class="text-3xl font-bold text-white">
+                <a href="index.html" class="hover:text-orange-200 transition-colors duration-300">Mana Fanfic Vietne</a>
+            </h1>
+            <div class="flex items-center space-x-4 md:space-x-6 flex-grow md:flex-grow-0 justify-end md:justify-start">
+                <div class="relative w-full md:w-auto max-w-xs order-3 md:order-none mt-4 md:mt-0">
+                    <input type="text" id="search-input" placeholder="Meklēt stāstus..." class="w-full pl-10 pr-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500 order-1 md:order-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <div class="relative order-2 md:order-none">
+                    <button id="user-menu-button" class="flex items-center space-x-2 p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="hidden md:inline">Lietotājs</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="user-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                        <a href="user-profile.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mans Profils</a>
+                        <a href="my-stories.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mani Stāsti</a>
+                        <hr class="border-stone-200 my-1">
+                        <a href="#" id="logout-button-dropdown" class="block px-4 py-2 text-red-600 hover:bg-red-50">Izrakstīties</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="main-nav" class="hidden md:flex flex-col md:flex-row md:items-center w-full md:w-auto mt-6 md:mt-0 order-4 md:order-none">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Sākums</a></li>
+                    <li><a href="art.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Māksla</a></li>
+                    <li><a href="archive.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Arhīvs</a></li>
+                    <li><a href="forum.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Forums</a></li>
+                    <li><a href="about-us.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Par mums</a></li> <!-- UPDATED LINK -->
+                    <!-- Pieteikties poga ar ID -->
+                    <li id="login-nav-item"><a href="auth.html?mode=login" class="block px-4 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Pieteikties</a></li>
+                    <!-- Reģistrēties poga ar gaišāku fonu un ID -->
+                    <li id="register-nav-item"><a href="auth.html?mode=register" class="block px-4 py-2 rounded-md bg-white border border-orange-700 text-orange-700 hover:bg-orange-50 transition-colors duration-300 shadow-md">Reģistrēties</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8 flex items-center justify-center">
+        <div class="container mx-auto px-4 max-w-lg bg-white p-8 rounded-lg shadow-md">
+            <h2 id="auth-title" class="text-3xl font-semibold text-center text-stone-800 mb-6 pb-2 relative">
+                Pieteikties
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>
+            </h2>
+
+            <form id="auth-form" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-stone-700 mb-1">E-pasts</label>
+                    <input type="email" id="email" name="email" required class="auth-input">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-stone-700 mb-1">Parole</label>
+                    <input type="password" id="password" name="password" required class="auth-input">
+                </div>
+                <div id="confirm-password-group" class="hidden">
+                    <label for="confirm-password" class="block text-sm font-medium text-stone-700 mb-1">Apstiprināt paroli</label>
+                    <input type="password" id="confirm-password" name="confirm-password" class="auth-input">
+                </div>
+
+                <button type="submit" id="auth-submit-button" class="w-full px-4 py-3 rounded-md bg-orange-700 text-white font-semibold text-lg hover:bg-orange-800 transition-all duration-300 shadow-lg transform hover:scale-105">
+                    Pieteikties
+                </button>
+            </form>
+
+            <p class="text-center text-sm text-stone-600 mt-6">
+                <span id="toggle-auth-text">Nav konta?</span>
+                <a href="#" id="toggle-auth-link" class="text-orange-600 hover:text-orange-700 font-medium transition-colors duration-300">Reģistrēties šeit</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer Section (reused for consistency) -->
+    <footer class="bg-stone-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0">&copy; 2025 Mana Fanfic Vietne. Visas tiesības aizsargātas.</p>
+            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm">
+                <li><a href="privacy-policy.html" class="hover:text-orange-300 transition-colors duration-300">Konfidencialitātes politika</a></li>
+                <li><a href="terms-of-service.html" class="hover:text-orange-300 transition-colors duration-300">Lietošanas noteikumi</a></li>
+                <li><a href="contact.html" class="hover:text-orange-300 transition-colors duration-300">Kontakti</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Success/Error Message Box (no "Labi" button) -->
+    <div id="message-box" class="message-box"></div>
+
+    <!-- Ārējais kopējais JavaScript fails -->
+    <script type="module" src="common.js"></script>
+    <script type="module">
+        // Import Firebase Auth functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+
+        // Global variables for Firebase (from Canvas environment)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Initialize Firebase
+        let app;
+        let auth;
+        let db;
+
+        // Get elements
+        const authForm = document.getElementById('auth-form');
+        const authTitle = document.getElementById('auth-title');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordGroup = document.getElementById('confirm-password-group');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const authSubmitButton = document.getElementById('auth-submit-button');
+        const toggleAuthText = document.getElementById('toggle-auth-text');
+        const toggleAuthLink = document.getElementById('toggle-auth-link');
+        const messageBox = document.getElementById('message-box'); // The new message box element
+
+
+        let isLoginMode = true; // Default to login mode
+
+        // Function to show a message to the user (instead of modal)
+        function showMessage(message, type = 'success') {
+            messageBox.textContent = message;
+            messageBox.className = `message-box ${type}`; // Reset classes and apply new ones
+            messageBox.style.display = 'block'; // Show the message box
+            // The CSS animation 'fadeOut' handles hiding after 5 seconds
+        }
+
+        // Initialize Firebase
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                if (Object.keys(firebaseConfig).length === 0) {
+                    console.error("Firebase konfigurācija trūkst. Lūdzu, nodrošiniet __firebase_config.");
+                    showMessage("Kļūda: Firebase konfigurācija trūkst.", "error");
+                    return;
+                }
+
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app); // Initialize Firestore
+
+                // Handle authentication state changes
+                onAuthStateChanged(auth, async (user) => {
+                    if (!user) {
+                        try {
+                            if (initialAuthToken) {
+                                await signInWithCustomToken(auth, initialAuthToken);
+                                console.log("Pierakstīts ar pielāgotu tokenu.");
+                            } else {
+                                await signInAnonymously(auth);
+                                console.log("Pierakstīts anonīmi.");
+                            }
+                        } catch (error) {
+                            console.error("Firebase autentifikācijas kļūda:", error);
+                            showMessage(`Firebase autentifikācijas kļūda: ${error.message}`, "error");
+                        }
+                    }
+                    // Determine mode from URL AFTER auth state is potentially resolved
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const modeParam = urlParams.get('mode');
+                    if (modeParam === 'register') {
+                        isLoginMode = false;
+                    } else {
+                        isLoginMode = true;
+                    }
+                    updateAuthMode(); // Update UI after mode is set
+                });
+
+
+            } catch (error) {
+                console.error("Neizdevās inicializēt Firebase:", error);
+                showMessage(`Neizdevās inicializēt Firebase: ${error.message}`, "error");
+            }
+        });
+
+
+        // Function to update UI based on mode (Login/Register)
+        function updateAuthMode() {
+            if (!authTitle || !authSubmitButton || !toggleAuthText || !toggleAuthLink || !confirmPasswordGroup) {
+                console.error("Autentifikācijas UI elementi nav atrasti.");
+                return;
+            }
+            if (!isLoginMode) { // Register mode
+                authTitle.innerHTML = `Reģistrēties<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>`;
+                authSubmitButton.innerText = 'Reģistrēties';
+                toggleAuthText.innerText = 'Jau ir konts?';
+                toggleAuthLink.innerText = 'Pieteikties šeit';
+                confirmPasswordGroup.classList.remove('hidden');
+            } else { // Login mode
+                authTitle.innerHTML = `Pieteikties<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>`;
+                authSubmitButton.innerText = 'Pieteikties';
+                toggleAuthText.innerText = 'Nav konta?';
+                toggleAuthLink.innerText = 'Reģistrēties šeit';
+                confirmPasswordGroup.classList.add('hidden');
+            }
+        }
+
+        // Toggle between Login and Register modes
+        toggleAuthLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            isLoginMode = !isLoginMode;
+            updateAuthMode();
+            // Update URL based on mode
+            const newMode = isLoginMode ? 'login' : 'register';
+            history.pushState(null, '', `auth.html?mode=${newMode}`);
+        });
+
+        // Handle form submission
+        authForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            if (!email || !password) {
+                showMessage('Lūdzu, ievadiet e-pastu un paroli.', 'error');
+                return;
+            }
+
+            if (isLoginMode) {
+                // Login logic
+                try {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    showMessage('Pieteikšanās veiksmīga! Jūs esat veiksmīgi pieteicies.', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'index.html'; // Redirect to home page
+                    }, 2000);
+                } catch (error) {
+                    console.error("Pieteikšanās kļūda:", error);
+                    let errorMessage = "Neizdevās pieteikties. Lūdzu, pārbaudiet savu e-pastu un paroli.";
+                    if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                        errorMessage = "Nepareizs e-pasts vai parole.";
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMessage = "Nederīgs e-pasta formāts.";
+                    }
+                    showMessage(errorMessage, "error");
+                }
+            } else {
+                // Register logic
+                const confirmPassword = confirmPasswordInput.value;
+                if (password !== confirmPassword) {
+                    showMessage('Paroles nesakrīt.', 'error');
+                    return;
+                }
+
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    console.log("Lietotājs veiksmīgi reģistrēts:", user.uid);
+
+                    // Add user data to Firestore
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id'; // Define appId here
+                    const userDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/profile/data`);
+                    await setDoc(userDocRef, {
+                        email: user.email,
+                        createdAt: new Date().toISOString(),
+                        // You can add more profile fields here
+                    });
+
+                    showMessage('Reģistrācija veiksmīga! Jūsu konts ir izveidots. Tagad varat pieteikties.', 'success');
+                    setTimeout(() => {
+                        isLoginMode = true; // Switch to login mode after successful registration
+                        updateAuthMode(); // Update UI
+                        history.pushState(null, '', 'auth.html?mode=login'); // Update URL
+                    }, 2000);
+                } catch (error) {
+                    console.error("Reģistrācijas kļūda:", error);
+                    let errorMessage = "Neizdevās reģistrēties.";
+                    if (error.code === 'auth/email-already-in-use') {
+                        errorMessage = "E-pasts jau tiek izmantots. Lūdzu, izmantojiet citu e-pastu vai piesakieties.";
+                    } else if (error.code === 'auth/weak-password') {
+                        errorMessage = "Parole ir pārāk vāja. Tai jābūt vismaz 6 rakstzīmēm garai.";
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMessage = "Nederīgs e-pasta formāts.";
+                    }
+                    showMessage(errorMessage, "error");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

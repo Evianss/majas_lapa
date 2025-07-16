@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forums - Mana Fanfic Vietne</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-amber-50 text-stone-800;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-4" style="background-image: url('colour-ge36531a2f_1920.jpg'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-4 flex justify-between items-center flex-wrap">
+            <h1 class="text-3xl font-bold text-white">
+                <a href="index.html" class="hover:text-orange-200 transition-colors duration-300">Mana Fanfic Vietne</a>
+            </h1>
+            <div class="flex items-center space-x-4 md:space-x-6 flex-grow md:flex-grow-0 justify-end md:justify-start">
+                <div class="relative w-full md:w-auto max-w-xs order-3 md:order-none mt-4 md:mt-0">
+                    <input type="text" id="search-input" placeholder="Meklēt stāstus..." class="w-full pl-10 pr-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500 order-1 md:order-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <div class="relative order-2 md:order-none">
+                    <button id="user-menu-button" class="flex items-center space-x-2 p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="hidden md:inline">Lietotājs</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="user-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                        <a href="user-profile.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mans Profils</a>
+                        <a href="my-stories.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mani Stāsti</a>
+                        <hr class="border-stone-200 my-1">
+                        <a href="#" id="logout-button-dropdown" class="block px-4 py-2 text-red-600 hover:bg-red-50">Izrakstīties</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="main-nav" class="hidden md:flex flex-col md:flex-row md:items-center w-full md:w-auto mt-6 md:mt-0 order-4 md:order-none">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Sākums</a></li>
+                    <li><a href="art.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Māksla</a></li>
+                    <li><a href="archive.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Arhīvs</a></li>
+                    <li><a href="forum.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Forums</a></li>
+                    <li><a href="about-us.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Par mums</a></li> <!-- UPDATED LINK -->
+                    <!-- Pieteikties poga ar ID -->
+                    <li id="login-nav-item"><a href="auth.html?mode=login" class="block px-4 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Pieteikties</a></li>
+                    <!-- Reģistrēties poga ar gaišāku fonu un ID -->
+                    <li id="register-nav-item"><a href="auth.html?mode=register" class="block px-4 py-2 rounded-md bg-white border border-orange-700 text-orange-700 hover:bg-orange-50 transition-colors duration-300 shadow-md">Reģistrēties</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-orange-700 mb-8 pb-4 relative">
+                Forums
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>
+            </h2>
+
+            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">Izveidot Jaunu Tēmu</h3>
+                <input type="text" id="new-topic-title" placeholder="Tēmas virsraksts" class="w-full p-3 rounded-md border border-stone-300 mb-3 focus:ring-orange-500 focus:border-orange-500 text-stone-700">
+                <textarea id="new-topic-content" placeholder="Jūsu ziņojums..." rows="5" class="w-full p-3 rounded-md border border-stone-300 mb-3 focus:ring-orange-500 focus:border-orange-500 text-stone-700"></textarea>
+                <button id="create-topic-button" class="bg-orange-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-800 transition-colors duration-300 shadow-md">Izveidot Tēmu</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">Forum Tēmas</h3>
+                <div id="forum-topics-list" class="divide-y divide-stone-200">
+                    <!-- Forum topics will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for messages -->
+    <div id="message-modal" class="fixed inset-0 bg-stone-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
+            <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+            <p id="modal-message" class="text-stone-700 mb-6"></p>
+            <button id="modal-close-button" class="bg-orange-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-800 transition-colors duration-300">Aizvērt</button>
+        </div>
+    </div>
+
+
+    <!-- Footer Section -->
+    <footer class="bg-stone-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0">&copy; 2025 Mana Fanfic Vietne. Visas tiesības aizsargātas.</p>
+            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm">
+                <li><a href="privacy-policy.html" class="hover:text-orange-300 transition-colors duration-300">Konfidencialitātes politika</a></li>
+                <li><a href="terms-of-service.html" class="hover:text-orange-300 transition-colors duration-300">Lietošanas noteikumi</a></li>
+                <li><a href="contact.html" class="hover:text-orange-300 transition-colors duration-300">Kontakti</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Ārējais kopējais JavaScript fails -->
+    <script type="module" src="common.js"></script>
+    <script type="module">
+        import { doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+
+        // Modal elements
+        const messageModal = document.getElementById('message-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalCloseButton = document.getElementById('modal-close-button');
+
+
+        function showMessageModal(title, message, type = 'info') {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            // Optionally, change modal styling based on type (e.g., 'success', 'error', 'info')
+            if (type === 'error') {
+                modalTitle.classList.add('text-red-600');
+                modalTitle.classList.remove('text-green-600', 'text-stone-800');
+            } else if (type === 'success') {
+                modalTitle.classList.add('text-green-600');
+                modalTitle.classList.remove('text-red-600', 'text-stone-800');
+            } else {
+                modalTitle.classList.add('text-stone-800');
+                modalTitle.classList.remove('text-red-600', 'text-green-600');
+            }
+            messageModal.classList.remove('hidden');
+        }
+
+        modalCloseButton.addEventListener('click', () => {
+            messageModal.classList.add('hidden');
+        });
+
+
+        window.initializePageContent = async function() {
+            console.log("initializePageContent called in forum.html. Auth ready:", window.isAuthReady, "DB:", !!window.db, "User ID:", window.userId);
+
+            const newTopicTitleInput = document.getElementById('new-topic-title');
+            const newTopicContentInput = document.getElementById('new-topic-content');
+            const createTopicButton = document.getElementById('create-topic-button');
+            const forumTopicsList = document.getElementById('forum-topics-list');
+
+            if (!window.db || !window.isAuthReady) {
+                console.warn("Firestore vai autentifikācija nav gatava forum.html. Funkcionalitāte var būt ierobežota.");
+                showMessageModal('Kļūda', 'Foruma funkcionalitāte nav pieejama. Lūdzu, mēģiniet vēlreiz vēlāk.', 'error');
+                return;
+            }
+
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const userId = window.userId; // Get userId from common.js
+            const topicsCol = collection(window.db, `artifacts/${appId}/public/data/forumTopics`);
+
+            // Function to render forum topics
+            function renderForumTopics(topics) {
+                forumTopicsList.innerHTML = ''; // Clear current topics
+
+                if (topics.length === 0) {
+                    forumTopicsList.innerHTML = '<p class="text-center text-stone-500 py-4">Nav nevienas foruma tēmas. Esiet pirmais, kas izveido jaunu tēmu!</p>';
+                    return;
+                }
+
+                // Sort topics by createdAt, newest first
+                const sortedTopics = topics.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                sortedTopics.forEach(topic => {
+                    const topicElement = document.createElement('div');
+                    topicElement.classList.add('py-4');
+                    topicElement.innerHTML = `
+                        <h3 class="text-xl font-semibold text-stone-900 mb-2">${topic.title}</h3>
+                        <p class="text-stone-700 leading-relaxed mb-3">${topic.content}</p>
+                        <p class="text-sm text-stone-500">Izveidojis: ${topic.authorName || 'Anonīms'} ${new Date(topic.createdAt).toLocaleString('lv-LV')}</p>
+                    `;
+                    forumTopicsList.appendChild(topicElement);
+                });
+            }
+
+            // Real-time listener for forum topics
+            onSnapshot(topicsCol, (snapshot) => {
+                const topics = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderForumTopics(topics);
+            }, (error) => {
+                console.error("Kļūda, ielādējot foruma tēmas no Firestore:", error);
+                showMessageModal('Kļūda', 'Neizdevās ielādēt foruma tēmas. Lūdzu, mēģiniet vēlreiz.', 'error');
+            });
+
+            // Handle new topic creation
+            createTopicButton.addEventListener('click', async () => {
+                const title = newTopicTitleInput.value.trim();
+                const content = newTopicContentInput.value.trim();
+
+                if (title === '' || content === '') {
+                    showMessageModal('Kļūda', 'Lūdzu, aizpildiet visus laukus, lai izveidotu jaunu tēmu.', 'error');
+                    return;
+                }
+
+                try {
+                    // Get user's display name or use "Anonīms"
+                    const authorName = window.auth.currentUser ? (window.auth.currentUser.displayName || 'Anonīms') : 'Anonīms';
+
+                    await addDoc(topicsCol, {
+                        title: title,
+                        content: content,
+                        authorId: userId,
+                        authorName: authorName, // Save author's display name
+                        createdAt: new Date().toISOString()
+                    });
+
+                    newTopicTitleInput.value = '';
+                    newTopicContentInput.value = '';
+                    showMessageModal('Veiksmīgi!', 'Jauna foruma tēma ir izveidota!', 'success');
+                } catch (e) {
+                    console.error("Kļūda, pievienojot jaunu foruma tēmu:", e);
+                    showMessageModal('Kļūda', 'Neizdevās izveidot jaunu tēmu. Lūdzu, mēģiniet vēlreiz.', 'error');
+                }
+            });
+        };
+    </script>
+</body>
+</html>

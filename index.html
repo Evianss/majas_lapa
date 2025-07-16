@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stilizēta Fanfic Vietne</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ārējie kopējie stili -->
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* Šajā failā vairs nav nepieciešami specifiski modālo logu stili, jo tie ir noņemti no create-story.html */
+        /* Ja būtu kādi citi unikāli stili šai lapai, tie paliktu šeit */
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-4" style="background-image: url('colour-ge36531a2f_1920.jpg'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-4 flex justify-between items-center flex-wrap">
+            <!-- Site Logo -->
+            <h1 class="text-3xl font-bold text-white">
+                <a href="index.html" class="hover:text-orange-200 transition-colors duration-300">Mana Fanfic Vietne</a>
+            </h1>
+
+            <!-- Search Bar and Mobile Navigation Toggle Button -->
+            <div class="flex items-center space-x-4 md:space-x-6 flex-grow md:flex-grow-0 justify-end md:justify-start">
+                <!-- Search Bar -->
+                <div class="relative w-full md:w-auto max-w-xs order-3 md:order-none mt-4 md:mt-0">
+                    <input type="text" id="search-input" placeholder="Meklēt stāstus..." class="w-full pl-10 pr-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+
+                <!-- Mobile Navigation Toggle Button -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500 order-1 md:order-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Main Navigation - Adjusted mt-6 for more spacing on mobile -->
+            <nav id="main-nav" class="hidden md:flex flex-col md:flex-row md:items-center w-full md:w-auto mt-6 md:mt-0 order-4 md:order-none">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Sākums</a></li>
+                    <li><a href="art.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Māksla</a></li>
+                    <li><a href="archive.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Arhīvs</a></li>
+                    <li><a href="forum.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Forums</a></li>
+                    <li><a href="about-us.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Par mums</a></li> <!-- UPDATED LINK -->
+                    <!-- Pieteikties poga ar ID -->
+                    <li id="login-nav-item"><a href="auth.html?mode=login" class="block px-4 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Pieteikties</a></li>
+                    <!-- Reģistrēties poga ar gaišāku fonu un ID -->
+                    <li id="register-nav-item"><a href="auth.html?mode=register" class="block px-4 py-2 rounded-md bg-white border border-orange-700 text-orange-700 hover:bg-orange-50 transition-colors duration-300 shadow-md">Reģistrēties</a></li>
+                </ul>
+            </nav>
+
+            <!-- User Profile Dropdown - Pārvietots uz beigām -->
+            <div class="relative order-last">
+                <button id="user-menu-button" class="flex items-center space-x-2 p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span class="hidden md:inline">Lietotājs</span>
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="user-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                    <a href="user-profile.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mans Profils</a>
+                    <a href="my-stories.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mani Stāsti</a>
+                    <hr class="border-stone-200 my-1">
+                    <a href="#" id="logout-button-dropdown" class="block px-4 py-2 text-red-600 hover:bg-red-50">Izrakstīties</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8">
+        <div class="container mx-auto px-4">
+
+            <!-- Filter Section -->
+            <div class="mb-6 flex flex-col md:flex-row justify-center md:justify-end items-center space-y-4 md:space-y-0 md:space-x-4">
+                <label for="genre-filter" class="text-lg font-medium text-stone-700">Filtrēt pēc žanra:</label>
+                <select id="genre-filter" class="p-2 rounded-md border border-stone-300 bg-white text-stone-700 focus:ring-orange-500 focus:border-orange-500 shadow-sm w-full md:w-auto">
+                    <option value="all">Visi žanri</option>
+                    <!-- Genres will be dynamically loaded here -->
+                </select>
+            </div>
+
+            <!-- Featured Stories Section -->
+            <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-3xl font-semibold text-center text-stone-800 mb-6 pb-2 relative">
+                    Ieteicamie stāsti
+                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="story-grid">
+                    <!-- Story Cards will be dynamically loaded here -->
+                </div>
+            </section>
+
+            <!-- Recent Updates Section (links updated) -->
+            <section class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-3xl font-semibold text-center text-stone-800 mb-6 pb-2 relative">
+                    Jaunākie Atjauninājumi
+                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>
+                </h2>
+                <ul class="divide-y divide-stone-200" id="recent-updates-list">
+                    <!-- Recent updates will be dynamically loaded here -->
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-stone-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0">&copy; 2025 Mana Fanfic Vietne. Visas tiesības aizsargātas.</p>
+            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm">
+                <li><a href="privacy-policy.html" class="hover:text-orange-300 transition-colors duration-300">Konfidencialitātes politika</a></li>
+                <li><a href="terms-of-service.html" class="hover:text-orange-300 transition-colors duration-300">Lietošanas noteikumi</a></li>
+                <li><a href="contact.html" class="hover:text-orange-300 transition-colors duration-300">Kontakti</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Ārējais kopējais JavaScript fails -->
+    <script type="module" src="common.js"></script>
+    <script type="module">
+        // Importēt nepieciešamās Firestore funkcijas, kas nav iekļautas common.js
+        import { doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Šī funkcija tiks izsaukta pēc tam, kad Firebase ir inicializēts un autentifikācijas statuss ir atrisināts (no common.js)
+        window.initializePageContent = async function() {
+            console.log("initializePageContent called in index.html. Auth ready:", window.isAuthReady, "DB:", !!window.db, "User ID:", window.userId); // Added log
+
+            const storyGrid = document.getElementById('story-grid');
+            const genreFilter = document.getElementById('genre-filter');
+            const searchInput = document.getElementById('search-input');
+            const recentUpdatesList = document.getElementById('recent-updates-list');
+
+            console.log("Elements found: storyGrid:", !!storyGrid, "genreFilter:", !!genreFilter, "searchInput:", !!searchInput, "recentUpdatesList:", !!recentUpdatesList); // Added log for elements
+
+            // Default static stories (will be added to Firestore if collection is empty)
+            const initialStaticStories = [
+                {
+                    id: 'episkais-piedziivojums',
+                    title: 'Episkais Piedzīvojums',
+                    author: 'Fantāziju Rakstnieks',
+                    genre: 'Fantāzija',
+                    summary: 'Īss kopsavilkums par stāstu, piesaistot lasītāju uzmanību un sniedzot priekšstatu par sižetu. Šis stāsts vedīs jūs neaizmirstamā ceļojumā cauri maģiskām zemēm.',
+                    wordCount: 15000,
+                    createdAt: '2024-06-01T10:00:00Z', // Example date
+                    averageRating: 4.5,
+                    totalRatings: 10,
+                    ratings: {}
+                },
+                {
+                    id: 'milestiba-zvaigznes',
+                    title: 'Mīlestība Zvaigznēs',
+                    author: 'Romantikas Dvēsele',
+                    genre: 'Romantika',
+                    summary: 'Šeit būs vēl viena stāsta kopsavilkums, kas aicinās lasītāju iedziļināties. Stāsts par divām dvēselēm, kuras atrod viena otru galaktikas plašumos.',
+                    wordCount: 10000,
+                    createdAt: '2024-05-28T14:30:00Z',
+                    averageRating: 4.0,
+                    totalRatings: 8,
+                    ratings: {}
+                },
+                {
+                    id: 'noslepumaina-aizmugure',
+                    title: 'Noslēpumainā Aizmugure',
+                    author: 'Trilleru Meistars',
+                    genre: 'Trilleris',
+                    summary: 'Intriga un spriedze šajā kopsavilkumā, kas liks lasītājam vēlas uzzināt vairāk. Sekojiet detektīvam, kurš atklāj senus noslēpumus.',
+                    wordCount: 20000,
+                    createdAt: '2024-05-20T09:00:00Z',
+                    averageRating: 3.8,
+                    totalRatings: 12,
+                    ratings: {}
+                },
+                {
+                    id: 'kosmosa-odiseja',
+                    title: 'Kosmosa Odiseja',
+                    author: 'Zvaigžņu Pētnieks',
+                    genre: 'Zinātniskā fantastika',
+                    summary: 'Ceļojums pa galaktiku, atklājot jaunas civilizācijas un saskaroties ar nezināmiem draudiem.',
+                    wordCount: 18000,
+                    createdAt: '2024-05-10T11:00:00Z',
+                    averageRating: 4.2,
+                    totalRatings: 7,
+                    ratings: {}
+                },
+                {
+                    id: 'pazudusas-aizlieguma-noslepums',
+                    title: 'Pazudusas Aizlieguma Noslēpums',
+                    author: 'Mīklu Risinātājs',
+                    genre: 'Noslēpums',
+                    summary: 'Detektīvs cenšas atrisināt sarežģītu noziegumu, kas satricinājis nelielu pilsētiņu.',
+                    wordCount: 12000,
+                    createdAt: '2024-05-05T16:00:00Z',
+                    averageRating: 4.1,
+                    totalRatings: 9,
+                    ratings: {}
+                },
+                {
+                    id: 'aizliegtas-dzunglu-sirds',
+                    title: 'Aizliegtās Džungļu Sirds',
+                    author: 'Piedzīvojumu Meklētājs',
+                    genre: 'Piedzīvojumi',
+                    summary: 'Ekspedīcija dziļi neizpētītos džungļos, meklējot senu artefaktu un saskaroties ar bīstamiem noslēpumiem.',
+                    wordCount: 16000,
+                    createdAt: '2024-04-25T10:00:00Z',
+                    averageRating: 4.3,
+                    totalRatings: 6,
+                    ratings: {}
+                },
+                {
+                    id: 'nakts-noslepumi',
+                    title: 'Nakts Noslēpumi',
+                    author: 'Tumšais Rakstnieks',
+                    genre: '18+ ierobežots',
+                    summary: 'Stāsts pieaugušajiem ar tumšām tēmām un sarežģītām attiecībām, kas norisinās pilsētas ēnainajās ielās.',
+                    wordCount: 14000,
+                    createdAt: '2024-04-18T18:00:00Z',
+                    averageRating: 3.9,
+                    totalRatings: 5,
+                    ratings: {}
+                }
+            ];
+
+            let allStories = []; // This will hold all stories fetched from Firestore
+
+            // Function to add initial static stories to Firestore if the collection is empty
+            async function addInitialStoriesIfEmpty() {
+                // Izmanto window.db un window.isAuthReady no common.js
+                if (!window.db || !window.isAuthReady) {
+                    console.warn("Firestore nav gatavs sākotnējai stāstu aizpildīšanai (addInitialStoriesIfEmpty).");
+                    return;
+                }
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const storiesCol = collection(window.db, `artifacts/${appId}/public/data/stories`);
+
+                try {
+                    const querySnapshot = await getDocs(storiesCol); // This fetches current docs
+                    if (querySnapshot.empty) { // Checks if collection is empty
+                        console.log("Firestore stāstu kolekcija ir tukša. Pievieno sākotnējos statiskos stāstus...");
+                        for (const story of initialStaticStories) {
+                            // Izmanto setDoc ar specifisku ID, lai nodrošinātu konsekventus ID statiskajiem stāstiem
+                            await setDoc(doc(storiesCol, story.id), story);
+                        }
+                        console.log("Sākotnējie statiskie stāsti pievienoti Firestore.");
+                    } else {
+                        console.log("Firestore stāstu kolekcija nav tukša. Izlaiž sākotnējo aizpildīšanu.");
+                    }
+                } catch (e) {
+                    console.error("Kļūda, pārbaudot/pievienojot sākotnējos stāstus Firestore:", e);
+                }
+            }
+
+            // Function to fetch all stories from Firestore and listen for real-time updates
+            function subscribeToStories() {
+                // Izmanto window.db un window.isAuthReady no common.js
+                if (!window.db || !window.isAuthReady) {
+                    console.warn("Firestore nav gatavs stāstu abonēšanai (subscribeToStories).");
+                    return;
+                }
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const storiesCol = collection(window.db, `artifacts/${appId}/public/data/stories`);
+
+                onSnapshot(storiesCol, (snapshot) => {
+                    allStories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    console.log("Stāsti atjaunināti no Firestore:", allStories.length, "stāsti.");
+                    if (allStories.length === 0) {
+                        console.warn("Firestore atgrieza tukšu stāstu sarakstu. Pārbaudiet drošības noteikumus vai pārliecinieties, ka dati ir pievienoti.");
+                    }
+                    populateGenreFilter();
+                    applyFilters(); // Atkārtoti piemēro filtrus ar atjauninātiem datiem
+                    renderRecentUpdates();
+                }, (error) => {
+                    console.error("Kļūda, ielādējot reāllaika stāstus no Firestore:", error);
+                });
+            }
+
+            // Function to populate genre filter dropdown
+            function populateGenreFilter() {
+                if (!genreFilter) {
+                    console.error("ERROR: Žanru filtra elements nav atrasts. Nevar aizpildīt nolaižamo izvēlni.");
+                    return;
+                }
+                console.log("Aizpilda žanru filtru...");
+                const genres = new Set();
+                genres.add('all'); // Always include "Visi žanri"
+
+                allStories.forEach(story => {
+                    if (story.genre) {
+                        genres.add(story.genre);
+                    }
+                });
+
+                genreFilter.innerHTML = ''; // Clear existing options
+                genres.forEach(genre => {
+                    const option = document.createElement('option');
+                    option.value = genre;
+                    option.textContent = genre === 'all' ? 'Visi žanri' : genre;
+                    genreFilter.appendChild(option);
+                });
+                console.log("Žanri aizpildīti:", Array.from(genres).join(', '));
+            }
+
+            // Function to render story cards
+            function renderStoryCards(storiesToRender) {
+                if (!storyGrid) {
+                    console.error("ERROR: Stāstu režģa elements nav atrasts. Nevar atveidot stāstu kartes.");
+                    return;
+                }
+                console.log("Atveido stāstu kartes. Atveidojamie stāsti:", storiesToRender.length);
+                storyGrid.innerHTML = ''; // Clear current grid
+
+                if (storiesToRender.length === 0) {
+                    storyGrid.innerHTML = '<p class="text-center text-stone-500 col-span-full">Nav atrasts neviens stāsts, kas atbilstu jūsu kritērijiem.</p>';
+                }
+
+                storiesToRender.forEach(story => {
+                    const article = document.createElement('article');
+                    article.classList.add('story-card', 'bg-amber-50', 'border', 'border-stone-200', 'rounded-lg', 'p-5', 'hover:shadow-lg', 'transition-shadow', 'duration-300');
+                    article.dataset.genre = story.genre;
+
+                    // Visas saites tagad norāda uz story-detail.html ar stāsta ID
+                    const storyLink = `story-detail.html?id=${story.id}`;
+
+                    // Atveidot zvaigznes vidējam vērtējumam
+                    let starHtml = '';
+                    const avgRating = story.averageRating || 0;
+                    for (let i = 1; i <= 5; i++) {
+                        starHtml += `<span class="star ${i <= Math.round(avgRating) ? 'filled' : ''}">★</span>`;
+                    }
+                    const ratingText = story.totalRatings > 0 ? `(${avgRating.toFixed(1)}/5, ${story.totalRatings} vērtējumi)` : '(Nav vērtējumu)';
+
+
+                    article.innerHTML = `
+                        <h3 class="text-xl font-semibold text-stone-900 mb-2">
+                            <a href="${storyLink}" class="hover:text-orange-700 transition-colors duration-300 story-title">${story.title}</a>
+                        </h3>
+                        <p class="text-sm text-stone-600 mb-1">
+                            Autors: <a href="#" class="hover:text-orange-700">${story.author}</a> | Žanrs: ${story.genre} | Vārdi: ${story.wordCount.toLocaleString()}
+                        </p>
+                        <div class="flex items-center text-yellow-500 text-lg mb-3">
+                            ${starHtml}
+                            <span class="ml-2 text-stone-600 text-sm">${ratingText}</span>
+                        </div>
+                        <p class="text-stone-700 leading-relaxed story-summary">
+                            ${story.summary}
+                        </p>
+                    `;
+                    storyGrid.appendChild(article);
+                });
+                console.log("Stāstu kartes atveidotas.");
+            }
+
+            // Function to render recent updates
+            function renderRecentUpdates() {
+                if (!recentUpdatesList) {
+                    console.error("ERROR: Jaunāko atjauninājumu saraksta elements nav atrasts. Nevar atveidot atjauninājumus.");
+                    return;
+                }
+                console.log("Atveido jaunākos atjauninājumus...");
+                recentUpdatesList.innerHTML = ''; // Clear existing updates
+
+                // Sort all stories by creation date (newest first)
+                const sortedStories = [...allStories].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                // Take top 4 or fewer for recent updates
+                const updatesToShow = sortedStories.slice(0, 4);
+
+                if (updatesToShow.length === 0) {
+                    recentUpdatesList.innerHTML = '<li class="py-3 text-center text-stone-500">Nav jaunāko atjauninājumu.</li>';
+                }
+
+                updatesToShow.forEach(story => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('py-3', 'flex', 'justify-between', 'items-center');
+
+                    const storyLink = `story-detail.html?id=${story.id}`;
+
+                    const timeDiff = (new Date() - new Date(story.createdAt)) / (1000 * 60 * 60); // Difference in hours
+                    let timeAgo = '';
+                    if (timeDiff < 1) {
+                        timeAgo = `${Math.round(timeDiff * 60)} minūtēm`;
+                    } else if (timeDiff < 24) {
+                        timeAgo = `${Math.round(timeDiff)} stundām`;
+                    } else if (timeDiff < 24 * 7) {
+                        timeAgo = `${Math.round(timeDiff / 24)} dienām`;
+                    } else {
+                        timeAgo = `${Math.round(timeDiff / (24 * 7))} nedēļām`;
+                    }
+
+                    listItem.innerHTML = `
+                        <a href="${storyLink}" class="text-lg text-stone-700 hover:text-orange-700 transition-colors duration-300">${story.title}</a>
+                        <span class="text-sm text-stone-500">Pirms ${timeAgo}</span>
+                    `;
+                    recentUpdatesList.appendChild(listItem);
+                });
+                console.log("Jaunākie atjauninājumi atveidoti.");
+            }
+
+            // Function to apply both genre and search filters
+            function applyFilters() {
+                console.log("Piemēro filtrus...");
+                const selectedGenre = genreFilter ? genreFilter.value : 'all';
+                const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+
+                const filteredStories = allStories.filter(story => {
+                    const matchesGenre = (selectedGenre === 'all' || story.genre === selectedGenre);
+                    const title = story.title.toLowerCase();
+                    const summary = story.summary.toLowerCase();
+                    const matchesSearch = (title.includes(searchTerm) || summary.includes(searchTerm));
+                    return matchesGenre && matchesSearch;
+                });
+
+                renderStoryCards(filteredStories);
+                console.log("Filtri piemēroti. Filtrēto stāstu skaits:", filteredStories.length);
+            }
+
+            await addInitialStoriesIfEmpty(); // Add initial stories if needed
+            subscribeToStories(); // Start real-time listener
+            // Event Listeners for filters
+            if (genreFilter) {
+                genreFilter.addEventListener('change', applyFilters);
+            }
+            if (searchInput) {
+                searchInput.addEventListener('keyup', applyFilters);
+            }
+        };
+    </script>
+</body>
+</html>

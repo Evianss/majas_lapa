@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mani Stāsti - Mana Fanfic Vietne</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ārējie kopējie stili -->
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-amber-50 text-stone-800;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .story-card {
+            @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl;
+        }
+        .story-card-image {
+            @apply w-full h-48 object-cover;
+        }
+        .story-card-content {
+            @apply p-6;
+        }
+        .story-card-title {
+            @apply text-xl font-semibold text-stone-800 mb-2;
+        }
+        .story-card-description {
+            @apply text-stone-600 text-sm mb-4 line-clamp-3; /* Limit description to 3 lines */
+        }
+        .story-card-meta {
+            @apply text-xs text-stone-500 flex justify-between items-center;
+        }
+        .story-card-actions {
+            @apply flex justify-end space-x-2 mt-4;
+        }
+        .action-button {
+            @apply px-3 py-1 rounded-md text-sm font-medium transition-colors duration-300;
+        }
+        /* Styles for the custom modal - REMOVED */
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-4" style="background-image: url('colour-ge36531a2f_1920.jpg'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-4 flex justify-between items-center flex-wrap">
+            <h1 class="text-3xl font-bold text-white">
+                <a href="index.html" class="hover:text-orange-200 transition-colors duration-300">Mana Fanfic Vietne</a>
+            </h1>
+            <div class="flex items-center space-x-4 md:space-x-6 flex-grow md:flex-grow-0 justify-end md:justify-start">
+                <div class="relative w-full md:w-auto max-w-xs order-3 md:order-none mt-4 md:mt-0">
+                    <input type="text" id="search-input" placeholder="Meklēt stāstus..." class="w-full pl-10 pr-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500 order-1 md:order-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div class="relative order-2 md:order-none">
+                    <button id="user-menu-button" class="flex items-center space-x-2 p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="hidden md:inline ml-2 font-semibold">Lietotājs</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="user-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                        <a href="user-profile.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mans Profils</a>
+                        <a href="my-stories.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mani Stāsti</a>
+                        <hr class="border-stone-200 my-1">
+                        <a href="#" id="logout-button-dropdown" class="block px-4 py-2 text-red-600 hover:bg-red-50">Izrakstīties</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="main-nav" class="hidden md:flex flex-col md:flex-row md:items-center w-full md:w-auto mt-6 md:mt-0 order-4 md:order-none">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Sākums</a></li>
+                    <li><a href="art.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Māksla</a></li>
+                    <li><a href="archive.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Arhīvs</a></li>
+                    <li><a href="forum.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Forums</a></li>
+                    <li><a href="about-us.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Par mums</a></li> <!-- UPDATED LINK -->
+                    <li id="login-nav-item"><a href="auth.html?mode=login" class="block px-4 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Pieteikties</a></li>
+                    <li id="register-nav-item"><a href="auth.html?mode=register" class="block px-4 py-2 rounded-md bg-white border border-orange-700 text-orange-700 hover:bg-orange-50 transition-colors duration-300 shadow-md">Reģistrēties</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-center text-stone-800 mb-8 pb-2 relative">
+                Mani Stāsti
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-orange-600 rounded-full"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Example Story Card 1 -->
+                <div class="story-card">
+                    <img src="https://placehold.co/600x400/FFD700/000000?text=Stāsts+1" alt="Stāsta vāka attēls" class="story-card-image">
+                    <div class="story-card-content">
+                        <h3 class="story-card-title">Pazudušās atmiņas</h3>
+                        <p class="story-card-description">
+                            Sena leģenda vēsta par aizmirstu karaļvalsti, kuras iedzīvotāji zaudēja visas atmiņas. Jauna varone dodas ceļā, lai atrastu veidu, kā tos atgūt.
+                        </p>
+                        <div class="story-card-meta">
+                            <span>Autors: Jūs</span>
+                            <span>Publicēts: 2025. gada 1. janvāris</span>
+                        </div>
+                        <div class="story-card-actions">
+                            <button class="action-button bg-blue-500 text-white hover:bg-blue-600">Rediģēt</button>
+                            <button class="action-button bg-red-500 text-white hover:bg-red-600">Dzēst</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example Story Card 2 -->
+                <div class="story-card">
+                    <img src="https://placehold.co/600x400/ADD8E6/000000?text=Stāsts+2" alt="Stāsta vāka attēls" class="story-card-image">
+                    <div class="story-card-content">
+                        <h3 class="story-card-title">Zvaigžņu ceļotājs</h3>
+                        <p class="story-card-description">
+                            Stāsts par vientuļu ceļotāju, kurš šķērso galaktikas, meklējot sen aizmirstu civilizāciju un tās noslēpumus.
+                        </p>
+                        <div class="story-card-meta">
+                            <span>Autors: Jūs</span>
+                            <span>Publicēts: 2025. gada 15. februāris</span>
+                        </div>
+                        <div class="story-card-actions">
+                            <button class="action-button bg-blue-500 text-white hover:bg-blue-600">Rediģēt</button>
+                            <button class="action-button bg-red-500 text-white hover:bg-red-600">Dzēst</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example Story Card 3 -->
+                <div class="story-card">
+                    <img src="https://placehold.co/600x400/90EE90/000000?text=Stāsts+3" alt="Stāsta vāka attēls" class="story-card-image">
+                    <div class="story-card-content">
+                        <h3 class="story-card-title">Burvju mežs</h3>
+                        <p class="story-card-description">
+                            Mazs ciems, kas robežojas ar noslēpumainu burvju mežu, kurā dzīvo dīvainas radības un slēpjas senu rituālu atliekas.
+                        </p>
+                        <div class="story-card-meta">
+                            <span>Autors: Jūs</span>
+                            <span>Publicēts: 2025. gada 10. marts</span>
+                        </div>
+                        <div class="story-card-actions">
+                            <button class="action-button bg-blue-500 text-white hover:bg-blue-600">Rediģēt</button>
+                            <button class="action-button bg-red-500 text-white hover:bg-red-600">Dzēst</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- "Sākt jaunu stāstu" button -->
+            <div class="text-center mt-12">
+                <button id="start-new-story-button" class="px-6 py-3 rounded-md bg-orange-700 text-white font-semibold text-lg hover:bg-orange-800 transition-all duration-300 shadow-lg transform hover:scale-105">
+                    Sākt jaunu stāstu
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-stone-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0">&copy; 2025 Mana Fanfic Vietne. Visas tiesības aizsargātas.</p>
+            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm">
+                <li><a href="privacy-policy.html" class="hover:text-orange-300 transition-colors duration-300">Konfidencialitātes politika</a></li>
+                <li><a href="terms-of-service.html" class="hover:text-orange-300 transition-colors duration-300">Lietošanas noteikumi</a></li>
+                <li><a href="contact.html" class="hover:text-orange-300 transition-colors duration-300">Kontakti</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Success/Error Message Modal - REMOVED -->
+
+    <!-- Ārējais kopējais JavaScript fails -->
+    <script type="module" src="common.js"></script>
+    <script type="module">
+        // Import Firebase Auth functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signOut, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // Global variables for Firebase (from Canvas environment)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Initialize Firebase
+        let app;
+        let auth;
+
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            window.auth = auth; // Make auth globally accessible for other scripts if needed
+        } catch (error) {
+            console.error("Error initializing Firebase:", error);
+            // Replaced modal with console error
+        }
+
+        // Authenticate user on page load
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                try {
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                        console.log("Signed in with custom token.");
+                    } else {
+                        await signInAnonymously(auth);
+                        console.log("Signed in anonymously.");
+                    }
+                } catch (error) {
+                    console.error("Error signing in:", error);
+                    // Replaced modal with console error
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // common.js handles mobile menu and user menu toggles via shared IDs.
+
+            const logoutButtonDropdown = document.getElementById('logout-button-dropdown');
+            // Removed message modal related elements and functions
+            const loginNavItem = document.getElementById('login-nav-item');
+            const registerNavItem = document.getElementById('register-nav-item');
+            const userMenuButton = document.getElementById('user-menu-button');
+
+            // Handle logout
+            if (logoutButtonDropdown) {
+                logoutButtonDropdown.addEventListener('click', async function(event) {
+                    event.preventDefault();
+                    try {
+                        await signOut(auth);
+                        console.log('Izrakstīšanās veiksmīga: Jūs esat veiksmīgi izrakstījies.'); // Log success
+                        // Redirect to home or login page after logout
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1500);
+                    } catch (error) {
+                        console.error("Izrakstīšanās kļūda:", error); // Log error
+                    }
+                });
+            }
+
+            // Update UI based on authentication state
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in
+                    loginNavItem.classList.add('hidden');
+                    registerNavItem.classList.add('hidden');
+                    userMenuButton.classList.remove('hidden'); // Show user menu button
+                } else {
+                    // User is signed out
+                    loginNavItem.classList.remove('hidden');
+                    registerNavItem.classList.remove('hidden');
+                    userMenuButton.classList.add('hidden'); // Hide user menu button
+                }
+            });
+
+            // Placeholder for "Start new story" button functionality
+            const startNewStoryButton = document.getElementById('start-new-story-button');
+            if (startNewStoryButton) {
+                startNewStoryButton.addEventListener('click', function() {
+                    console.info('Jauns stāsts: Šī funkcija vēl nav ieviesta. Drīzumā varēsiet sākt rakstīt jaunus stāstus!'); // Log info
+                });
+            }
+        });
+    </script>
+</body>
+</html>

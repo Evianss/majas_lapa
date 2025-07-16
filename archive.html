@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arhīvs - Mana Fanfic Vietne</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for Inter font and general body */
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-amber-50 text-stone-800;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header Section (reused from index.html for consistency) -->
+    <header class="bg-white shadow-sm py-4" style="background-image: url('colour-ge36531a2f_1920.jpg'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-4 flex justify-between items-center flex-wrap">
+            <h1 class="text-3xl font-bold text-white">
+                <a href="index.html" class="hover:text-orange-200 transition-colors duration-300">Mana Fanfic Vietne</a>
+            </h1>
+            <div class="flex items-center space-x-4 md:space-x-6 flex-grow md:flex-grow-0 justify-end md:justify-start">
+                <div class="relative w-full md:w-auto max-w-xs order-3 md:order-none mt-4 md:mt-0">
+                    <input type="text" id="search-input-archive" placeholder="Meklēt fanfikus..." class="w-full pl-10 pr-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <button id="mobile-menu-button-archive" class="md:hidden p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500 order-1 md:order-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div class="relative order-2 md:order-none">
+                    <button id="user-menu-button-archive" class="flex items-center space-x-2 p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="hidden md:inline">Lietotājs</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="user-menu-dropdown-archive" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                        <a href="user-profile.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mans Profila</a>
+                        <a href="my-stories.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mani Stāsti</a>
+                        <hr class="border-stone-200 my-1">
+                        <a href="#" class="block px-4 py-2 text-red-600 hover:bg-red-50">Izrakstīties</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="main-nav-archive" class="hidden md:flex flex-col md:flex-row md:items-center w-full md:w-auto mt-6 md:mt-0 order-4 md:order-none">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Sākums</a></li>
+                    <li><a href="art.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Māksla</a></li>
+                    <li><a href="archive.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Arhīvs</a></li>
+                    <li><a href="forum.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Forums</a></li>
+                    <li><a href="about-us.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Par mums</a></li> <!-- UPDATED LINK -->
+                    <li><a href="#" class="block px-4 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Pieteikties</a></li>
+                    <li><a href="#" class="block px-4 py-2 rounded-md border border-orange-700 text-orange-700 hover:bg-orange-50 transition-colors duration-300 shadow-md">Reģistrēties</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-center text-stone-800 mb-6 pb-2 relative">
+                Visi Stāsti Arhīvā
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>
+            </h2>
+
+            <!-- Filter Section for Archive Page -->
+            <div class="mb-6 flex flex-col md:flex-row justify-center md:justify-end items-center space-y-4 md:space-y-0 md:space-x-4">
+                <label for="genre-filter-archive" class="text-lg font-medium text-stone-700">Filtrēt pēc žanra:</label>
+                <select id="genre-filter-archive" class="p-2 rounded-md border border-stone-300 bg-white text-stone-700 focus:ring-orange-500 focus:border-orange-500 shadow-sm w-full md:w-auto">
+                    <option value="all">Visi žanri</option>
+                    <!-- Genres will be dynamically loaded here -->
+                </select>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="all-fanfics-grid-archive">
+                <!-- Fanfic Cards will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section (reused from index.html for consistency) -->
+    <footer class="bg-stone-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0">&copy; 2025 Mana Fanfic Vietne. Visas tiesības aizsargātas.</p>
+            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm">
+                <li><a href="privacy-policy.html" class="hover:text-orange-300 transition-colors duration-300">Konfidencialitātes politika</a></li>
+                <li><a href="terms-of-service.html" class="hover:text-orange-300 transition-colors duration-300">Lietošanas noteikumi</a></li>
+                <li><a href="contact.html" class="hover:text-orange-300 transition-colors duration-300">Kontakti</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs and Initialization -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables for Firebase instances and user ID
+        let app;
+        let db;
+        let auth;
+        let userId = null;
+        let isAuthReady = false; // Flag to indicate if auth state is resolved
+
+        // This function will be called after Firebase is initialized and auth state is resolved
+        window.initializePageContent = async function() {
+            // --- Dynamic Content Loading and Filtering ---
+
+            const allFanficsGridArchive = document.getElementById('all-fanfics-grid-archive');
+            const genreFilterArchive = document.getElementById('genre-filter-archive');
+            const searchInputArchive = document.getElementById('search-input-archive');
+
+            let allStories = []; // This will hold all stories fetched from Firestore
+
+            // Function to fetch all stories from Firestore and listen for real-time updates
+            function subscribeToStories() {
+                if (!db || !isAuthReady) {
+                    console.warn("Firestore not ready for story subscription.");
+                    return;
+                }
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const storiesCol = collection(db, `artifacts/${appId}/public/data/stories`);
+
+                onSnapshot(storiesCol, (snapshot) => {
+                    allStories = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    console.log("Stories updated from Firestore:", allStories);
+                    populateGenreFilter();
+                    applyFanficFilters(); // Re-apply filters with updated data
+                }, (error) => {
+                    console.error("Error fetching real-time stories:", error);
+                });
+            }
+
+            // Function to populate genre filter dropdown
+            function populateGenreFilter() {
+                if (!genreFilterArchive) {
+                    console.warn("Genre filter archive element not found. Cannot populate dropdown.");
+                    return;
+                }
+                const genres = new Set();
+                genres.add('all'); // Always include "Visi žanri"
+
+                allStories.forEach(story => {
+                    if (story.genre) {
+                        genres.add(story.genre);
+                    }
+                });
+
+                genreFilterArchive.innerHTML = ''; // Clear existing options
+                genres.forEach(genre => {
+                    const option = document.createElement('option');
+                    option.value = genre;
+                    option.textContent = genre === 'all' ? 'Visi žanri' : genre;
+                    genreFilterArchive.appendChild(option);
+                });
+            }
+
+            // Function to render fanfic cards
+            function renderFanficCards(storiesToRender) {
+                if (!allFanficsGridArchive) {
+                    console.warn("All fanfics grid archive element not found. Cannot render fanfic cards.");
+                    return;
+                }
+                allFanficsGridArchive.innerHTML = ''; // Clear current grid
+
+                storiesToRender.forEach(story => {
+                    const article = document.createElement('article');
+                    article.classList.add('fanfic-card', 'bg-white', 'border', 'border-stone-200', 'rounded-lg', 'p-5', 'hover:shadow-lg', 'transition-shadow', 'duration-300');
+                    article.dataset.genre = story.genre;
+
+                    // All links now point to story-detail.html with the story ID
+                    const storyLink = `story-detail.html?id=${story.id}`;
+
+                    // Render stars for average rating
+                    let starHtml = '';
+                    const avgRating = story.averageRating || 0;
+                    for (let i = 1; i <= 5; i++) {
+                        starHtml += `<span class="star ${i <= Math.round(avgRating) ? 'filled' : ''}">★</span>`;
+                    }
+                    const ratingText = story.totalRatings > 0 ? `(${avgRating.toFixed(1)}/5, ${story.totalRatings} vērtējumi)` : '(Nav vērtējumu)';
+
+
+                    article.innerHTML = `
+                        <h3 class="text-xl font-semibold text-stone-900 mb-2">
+                            <a href="${storyLink}" class="hover:text-orange-700 transition-colors duration-300 fanfic-title">${story.title}</a>
+                        </h3>
+                        <p class="text-sm text-stone-600 mb-1">
+                            Autors: <a href="#" class="hover:text-orange-700">${story.author}</a> | Žanrs: ${story.genre} | Vārdi: ${story.wordCount.toLocaleString()}
+                        </p>
+                        <div class="flex items-center text-yellow-500 text-lg mb-3">
+                            ${starHtml}
+                            <span class="ml-2 text-stone-600 text-sm">${ratingText}</span>
+                        </div>
+                        <p class="text-stone-700 leading-relaxed fanfic-summary">
+                            ${story.summary}
+                        </p>
+                    `;
+                    allFanficsGridArchive.appendChild(article);
+                });
+            }
+
+            // Function to apply both genre and search filters on archive.html
+            function applyFanficFilters() {
+                const selectedGenre = genreFilterArchive ? genreFilterArchive.value : 'all';
+                const searchTerm = searchInputArchive ? searchInputArchive.value.toLowerCase() : '';
+
+                const filteredStories = allStories.filter(story => {
+                    const matchesGenre = (selectedGenre === 'all' || story.genre === selectedGenre);
+                    const title = story.title.toLowerCase();
+                    const summary = story.summary.toLowerCase();
+                    const matchesSearch = (title.includes(searchTerm) || summary.includes(searchTerm));
+                    return matchesGenre && matchesSearch;
+                });
+
+                renderFanficCards(filteredStories);
+            }
+
+            subscribeToStories(); // Start real-time listener
+            // Event Listeners
+            if (genreFilterArchive) {
+                genreFilterArchive.addEventListener('change', applyFanficFilters);
+            }
+            if (searchInputArchive) {
+                searchInputArchive.addEventListener('keyup', applyFanficFilters);
+            }
+        };
+
+        // Initialize Firebase and authenticate
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+
+                if (Object.keys(firebaseConfig).length === 0) {
+                    console.error("Firebase configuration is missing. Please provide __firebase_config.");
+                    return;
+                }
+
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Mobile Menu Toggle
+                const mobileMenuButton = document.getElementById('mobile-menu-button-archive');
+                const mainNav = document.getElementById('main-nav-archive');
+                if (mobileMenuButton && mainNav) {
+                    mobileMenuButton.addEventListener('click', function() {
+                        mainNav.classList.toggle('hidden');
+                        mainNav.classList.toggle('flex');
+                        mainNav.classList.toggle('flex-col');
+                    });
+                    mainNav.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            if (window.innerWidth < 768) {
+                                mainNav.classList.add('hidden');
+                                mainNav.classList.remove('flex');
+                                mainNav.classList.remove('flex-col');
+                            }
+                        });
+                    });
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= 768) {
+                            mainNav.classList.remove('hidden');
+                            mainNav.classList.add('flex');
+                            mainNav.classList.remove('flex-col');
+                        } else {
+                            mainNav.classList.add('hidden');
+                            mainNav.classList.remove('flex');
+                            mainNav.classList.remove('flex-col');
+                        }
+                    });
+                } else {
+                    console.warn("Mobile menu elements not found on DOMContentLoaded.");
+                }
+
+                // User Profile Dropdown
+                const userMenuButton = document.getElementById('user-menu-button-archive');
+                const userMenuDropdown = document.getElementById('user-menu-dropdown-archive');
+                if (userMenuButton && userMenuDropdown) {
+                    userMenuButton.addEventListener('click', function(event) {
+                        event.stopPropagation();
+                        userMenuDropdown.classList.toggle('hidden');
+                    });
+                    document.addEventListener('click', function(event) {
+                        if (!userMenuButton.contains(event.target) && !userMenuDropdown.contains(event.target)) {
+                            userMenuDropdown.classList.add('hidden');
+                        }
+                    });
+                } else {
+                    console.warn("User menu elements not found on DOMContentLoaded.");
+                }
+
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        console.log("Authenticated with Firebase UID:", userId);
+                    } else {
+                        // Sign in anonymously if no user is logged in
+                        try {
+                            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                                await signInWithCustomToken(auth, __initial_auth_token);
+                                userId = auth.currentUser.uid;
+                                console.log("Signed in with custom token. UID:", userId);
+                            } else {
+                                await signInAnonymously(auth);
+                                userId = auth.currentUser.uid;
+                                console.log("Signed in anonymously. UID:", userId);
+                            }
+                        } catch (error) {
+                            console.error("Firebase authentication error:", error);
+                        }
+                    }
+                    isAuthReady = true; // Auth state is resolved
+                    initializePageContent(); // Call content initialization after auth is ready
+                });
+
+            } catch (error) {
+                console.error("Failed to initialize Firebase:", error);
+            }
+        });
+    </script>
+</body>
+</html>

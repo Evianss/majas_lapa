@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lietošanas noteikumi - Mana Fanfic Vietne</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-amber-50 text-stone-800;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        h3 {
+            @apply text-2xl font-semibold text-stone-800 mb-4 mt-6;
+        }
+        p {
+            @apply mb-4 leading-relaxed;
+        }
+        ul {
+            @apply list-disc list-inside mb-4 ml-4;
+        }
+        li {
+            @apply mb-2;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-4" style="background-image: url('colour-ge36531a2f_1920.jpg'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-4 flex justify-between items-center flex-wrap">
+            <h1 class="text-3xl font-bold text-white">
+                <a href="index.html" class="hover:text-orange-200 transition-colors duration-300">Mana Fanfic Vietne</a>
+            </h1>
+            <div class="flex items-center space-x-4 md:space-x-6 flex-grow md:flex-grow-0 justify-end md:justify-start">
+                <div class="relative w-full md:w-auto max-w-xs order-3 md:order-none mt-4 md:mt-0">
+                    <input type="text" id="search-input" placeholder="Meklēt stāstus..." class="w-full pl-10 pr-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500 order-1 md:order-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div class="relative order-2 md:order-none">
+                    <button id="user-menu-button" class="flex items-center space-x-2 p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="hidden md:inline">Lietotājs</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="user-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                        <a href="user-profile.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mans Profils</a>
+                        <a href="my-stories.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mani Stāsti</a>
+                        <hr class="border-stone-200 my-1">
+                        <a href="#" class="block px-4 py-2 text-red-600 hover:bg-red-50">Izrakstīties</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="main-nav" class="hidden md:flex flex-col md:flex-row md:items-center w-full md:w-auto mt-6 md:mt-0 order-4 md:order-none">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Sākums</a></li>
+                    <li><a href="art.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Māksla</a></li>
+                    <li><a href="archive.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Arhīvs</a></li>
+                    <li><a href="forum.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Forums</a></li>
+                    <li><a href="about-us.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Par mums</a></li> <!-- UPDATED LINK -->
+                    <li><a href="auth.html?mode=login" class="block px-4 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Pieteikties</a></li>
+                    <li><a href="auth.html?mode=register" class="block px-4 py-2 rounded-md border border-orange-700 text-orange-700 hover:bg-orange-50 transition-colors duration-300 shadow-md">Reģistrēties</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8">
+        <div class="container mx-auto px-4 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-center text-stone-800 mb-6 pb-2 relative">
+                Lietošanas noteikumi
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>
+            </h2>
+
+            <p>Laipni lūdzam Manā Fanfic Vietnē! Lūdzu, rūpīgi izlasiet šos lietošanas noteikumus ("Noteikumi"), pirms izmantojat mūsu vietni. Piekļūstot vai izmantojot Vietni, jūs piekrītat ievērot šos Noteikumus. Ja jūs nepiekrītat šiem Noteikumiem, lūdzu, neizmantojiet Vietni.</p>
+
+            <h3>1. Lietošanas noteikumu pieņemšana</h3>
+            <p>Šie Noteikumi veido juridiski saistošu līgumu starp jums un Manu Fanfic Vietni. Mēs paturam tiesības jebkurā laikā mainīt vai atjaunināt šos Noteikumus. Jūsu turpmāka Vietnes izmantošana pēc izmaiņu publicēšanas nozīmē jūsu piekrišanu šīm izmaiņām.</p>
+
+            <h3>2. Lietotāja konts</h3>
+            <ul>
+                <li>Lai piekļūtu noteiktām Vietnes funkcijām, piemēram, stāstu publicēšanai vai vērtēšanai, jums var būt nepieciešams izveidot kontu.</li>
+                <li>Jūs esat atbildīgs par sava konta informācijas konfidencialitātes saglabāšanu un par visām darbībām, kas notiek jūsu kontā.</li>
+                <li>Jūs piekrītat nekavējoties paziņot mums par jebkādu neatļautu jūsu konta izmantošanu.</li>
+            </ul>
+
+            <h3>3. Saturs un autortiesības</h3>
+            <ul>
+                <li>Jūs esat pilnībā atbildīgs par saturu, ko jūs publicējat Vietnē (piemēram, fanfiction stāsti, komentāri, foruma ziņas).</li>
+                <li>Jums ir jābūt tiesībām publicēt saturu, ko jūs augšupielādējat. Neaugšupielādējiet saturu, kas pārkāpj autortiesības, preču zīmes vai citas trešo personu intelektuālā īpašuma tiesības.</li>
+                <li>Mēs neuzņemamies atbildību par lietotāju publicēto saturu. Tomēr mēs paturam tiesības noņemt saturu, kas pārkāpj šos Noteikumus vai tiek uzskatīts par nepiemērotu.</li>
+                <li>Publicējot saturu Vietnē, jūs piešķirat Mums neekskluzīvu, bezatlīdzības, vispasaules licenci izmantot, reproducēt, modificēt, publicēt, tulkot un izplatīt šo saturu saistībā ar Vietnes darbību.</li>
+            </ul>
+
+            <h3>4. Aizliegtās darbības</h3>
+            <p>Jums ir aizliegts:</p>
+            <ul>
+                <li>Publicēt nelikumīgu, apmelojošu, naidīgu, pornogrāfisku, draudīgu vai citādi nepiemērotu saturu.</li>
+                <li>Mēģināt iegūt neatļautu piekļuvi Vietnei vai tās sistēmām.</li>
+                <li>Veikt darbības, kas var traucēt Vietnes darbību vai drošību.</li>
+                <li>Izmantot Vietni komerciāliem mērķiem bez mūsu iepriekšējas rakstiskas piekrišanas.</li>
+                <li>Pārkāpt jebkādus piemērojamos likumus vai noteikumus.</li>
+            </ul>
+
+            <h3>5. Atrunas</h3>
+            <p>Vietne tiek nodrošināta "tāda, kāda tā ir" un "kā pieejama" bez jebkādām garantijām, tiešām vai netiešām. Mēs negarantējam, ka Vietne būs nepārtraukta, bez kļūdām vai droša.</p>
+
+            <h3>6. Atbildības ierobežojums</h3>
+            <p>Mēs neesam atbildīgi par jebkādiem tiešiem, netiešiem, nejaušiem, īpašiem vai izrietošiem zaudējumiem, kas radušies no jūsu Vietnes izmantošanas vai nespējas to izmantot.</p>
+
+            <h3>7. Lietošanas noteikumu izmaiņas</h3>
+            <p>Mēs paturam tiesības jebkurā laikā mainīt šos Noteikumus. Mēs publicēsim paziņojumu par izmaiņām Vietnē. Jūsu turpmāka Vietnes izmantošana pēc izmaiņu publicēšanas nozīmē jūsu piekrišanu šīm izmaiņām.</p>
+
+            <h3>8. Izbeigšana</h3>
+            <p>Mēs paturam tiesības pēc saviem ieskatiem apturēt vai izbeigt jūsu piekļuvi Vietnei jebkurā laikā, bez iepriekšēja brīdinājuma, ja jūs pārkāpjat šos Noteikumus.</p>
+
+            <h3>9. Sazinieties ar mums</h3>
+            <p>Ja jums ir jautājumi par šiem Lietošanas noteikumiem, lūdzu, sazinieties ar mums, izmantojot mūsu <a href="contact.html" class="text-orange-700 hover:underline">kontaktu lapu</a>.</p>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-stone-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0">&copy; 2025 Mana Fanfic Vietne. Visas tiesības aizsargātas.</p>
+            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm">
+                <li><a href="privacy-policy.html" class="hover:text-orange-300 transition-colors duration-300">Konfidencialitātes politika</a></li>
+                <li><a href="terms-of-service.html" class="hover:text-orange-300 transition-colors duration-300">Lietošanas noteikumi</a></li>
+                <li><a href="contact.html" class="hover:text-orange-300 transition-colors duration-300">Kontakti</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs and Initialization -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables for Firebase instances and user ID
+        let app;
+        let db;
+        let auth;
+        let userId = null;
+        let isAuthReady = false; // Flag to indicate if auth state is resolved
+
+        // Initialize Firebase and authenticate
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+
+                if (Object.keys(firebaseConfig).length === 0) {
+                    console.error("Firebase configuration is missing. Please provide __firebase_config.");
+                    return;
+                }
+
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Mobile Menu Toggle
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mainNav = document.getElementById('main-nav');
+                if (mobileMenuButton && mainNav) {
+                    mobileMenuButton.addEventListener('click', function() {
+                        mainNav.classList.toggle('hidden');
+                        mainNav.classList.toggle('flex');
+                        mainNav.classList.toggle('flex-col');
+                    });
+                    mainNav.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            if (window.innerWidth < 768) {
+                                mainNav.classList.add('hidden');
+                                mainNav.classList.remove('flex');
+                                mainNav.classList.remove('flex-col');
+                            }
+                        });
+                    });
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= 768) {
+                            mainNav.classList.remove('hidden');
+                            mainNav.classList.add('flex');
+                            mainNav.classList.remove('flex-col');
+                        } else {
+                            mainNav.classList.add('hidden');
+                            mainNav.classList.remove('flex');
+                            mainNav.classList.remove('flex-col');
+                        }
+                    });
+                } else {
+                    console.warn("Mobile menu elements not found on DOMContentLoaded.");
+                }
+
+                // User Profile Dropdown
+                const userMenuButton = document.getElementById('user-menu-button');
+                const userMenuDropdown = document.getElementById('user-menu-dropdown');
+                if (userMenuButton && userMenuDropdown) {
+                    userMenuButton.addEventListener('click', function(event) {
+                        event.stopPropagation();
+                        userMenuDropdown.classList.toggle('hidden');
+                    });
+                    document.addEventListener('click', function(event) {
+                        if (!userMenuButton.contains(event.target) && !userMenuDropdown.contains(event.target)) {
+                            userMenuDropdown.classList.add('hidden');
+                        }
+                    });
+                } else {
+                    console.warn("User menu elements not found on DOMContentLoaded.");
+                }
+
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        console.log("Authenticated with Firebase UID:", userId);
+                    } else {
+                        // Sign in anonymously if no user is logged in
+                        try {
+                            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null; // Get initialAuthToken here
+                            if (initialAuthToken) {
+                                await signInWithCustomToken(auth, initialAuthToken);
+                                userId = auth.currentUser.uid;
+                                console.log("Signed in with custom token. UID:", userId);
+                            } else {
+                                await signInAnonymously(auth);
+                                userId = auth.currentUser.uid;
+                                console.log("Signed in anonymously. UID:", userId);
+                            }
+                        } catch (error) {
+                            console.error("Firebase authentication error:", error);
+                        }
+                    }
+                    isAuthReady = true; // Auth state is resolved
+                    // If this page had dynamic content, it would be called here: initializePageContent();
+                });
+
+            } catch (error) {
+                console.error("Failed to initialize Firebase:", error);
+            }
+        });
+    </script>
+</body>
+</html>

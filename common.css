@@ -1,0 +1,18 @@
+/* common.css */
+
+/* Vispārīgie ķermeņa stili un fonti */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #fffbeb; /* Tailwind bg-amber-50 */
+    color: #44403c; /* Tailwind text-stone-800 */
+}
+
+/* Paslēpt ritjoslu tīrākam izskatam */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}

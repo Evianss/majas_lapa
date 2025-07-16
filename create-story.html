@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pievienot Jaunu Stāstu - Mana Fanfic Vietne</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ārējie kopējie stili -->
+    <link rel="stylesheet" href="common.css">
+    <!-- Ārējie modālo logu stili (ja šajā lapā izmanto modālos logus) -->
+    <!-- Šie stili vairs nav nepieciešami, jo modālie logi ir noņemti -->
+    <!-- <link rel="stylesheet" href="modals.css"> -->
+    <style>
+        /* Šajā failā vairs nav nepieciešami specifiski modālo logu stili */
+        /* Ja būtu kādi citi unikāli stili šai lapai, tie paliktu šeit */
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-4" style="background-image: url('colour-ge36531a2f_1920.jpg'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-4 flex justify-between items-center flex-wrap">
+            <h1 class="text-3xl font-bold text-white">
+                <a href="index.html" class="hover:text-orange-200 transition-colors duration-300">Mana Fanfic Vietne</a>
+            </h1>
+            <div class="flex items-center space-x-4 md:space-x-6 flex-grow md:flex-grow-0 justify-end md:justify-start">
+                <div class="relative w-full md:w-auto max-w-xs order-3 md:order-none mt-4 md:mt-0">
+                    <input type="text" id="search-input" placeholder="Meklēt stāstus..." class="w-full pl-10 pr-4 py-2 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500 order-1 md:order-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div class="relative order-2 md:order-none">
+                    <button id="user-menu-button" class="flex items-center space-x-2 p-2 rounded-md text-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="hidden md:inline">Lietotājs</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="user-menu-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                        <a href="user-profile.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mans Profils</a>
+                        <a href="my-stories.html" class="block px-4 py-2 text-stone-700 hover:bg-stone-100">Mani Stāsti</a>
+                        <hr class="border-stone-200 my-1">
+                        <a href="#" class="block px-4 py-2 text-red-600 hover:bg-red-50">Izrakstīties</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="main-nav" class="hidden md:flex flex-col md:flex-row md:items-center w-full md:w-auto mt-6 md:mt-0 order-4 md:order-none">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-lg">
+                    <li><a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Sākums</a></li>
+                    <li><a href="art.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Māksla</a></li>
+                    <li><a href="archive.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Arhīvs</a></li>
+                    <li><a href="forum.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Forums</a></li>
+                    <li><a href="about-us.html" class="block px-3 py-2 rounded-md text-white hover:bg-stone-100 hover:text-orange-700 transition-all duration-300">Par mums</a></li> <!-- UPDATED LINK -->
+                    <li><a href="#" class="block px-4 py-2 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Pieteikties</a></li>
+                    <li><a href="#" class="block px-4 py-2 rounded-md border border-orange-700 text-orange-700 hover:bg-orange-50 transition-colors duration-300 shadow-md">Reģistrēties</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8">
+        <div class="container mx-auto px-4 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-center text-stone-800 mb-6 pb-2 relative">
+                Pievienot Jaunu Stāstu
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-orange-600 rounded-full"></span>
+            </h2>
+
+            <form id="story-form" class="space-y-6">
+                <div>
+                    <label for="story-title" class="block text-lg font-medium text-stone-700 mb-2">Stāsta Nosaukums:</label>
+                    <input type="text" id="story-title" name="story-title" required class="w-full p-3 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                </div>
+
+                <div>
+                    <label for="story-author" class="block text-lg font-medium text-stone-700 mb-2">Autors:</label>
+                    <input type="text" id="story-author" name="story-author" value="Lietotājvārds" required class="w-full p-3 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm" readonly>
+                </div>
+
+                <div>
+                    <label for="story-genre" class="block text-lg font-medium text-stone-700 mb-2">Žanrs:</label>
+                    <select id="story-genre" name="story-genre" class="w-full p-3 rounded-md border border-stone-300 bg-white text-stone-700 focus:ring-orange-500 focus:border-orange-500 shadow-sm">
+                        <!-- Default genres will be loaded here by JS -->
+                    </select>
+                    <div class="mt-3 flex items-center space-x-2">
+                        <input type="text" id="new-genre-input" placeholder="Vai pievienojiet jaunu žanru..." class="flex-grow p-3 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm">
+                        <button type="button" id="add-genre-button" class="px-4 py-2 rounded-md bg-orange-600 text-white hover:bg-orange-700 transition-colors duration-300 shadow-md">Pievienot</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="story-summary" class="block text-lg font-medium text-stone-700 mb-2">Kopsavilkums:</label>
+                    <textarea id="story-summary" name="story-summary" rows="4" required class="w-full p-3 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm"></textarea>
+                </div>
+
+                <div>
+                    <label for="story-content" class="block text-lg font-medium text-stone-700 mb-2">Stāsta Saturs:</label>
+                    <textarea id="story-content" name="story-content" rows="15" required class="w-full p-3 rounded-md border border-stone-300 focus:ring-orange-500 focus:border-orange-500 text-stone-700 bg-stone-100 shadow-sm"></textarea>
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cancel-button" class="px-6 py-3 rounded-md bg-stone-200 text-stone-800 hover:bg-stone-300 transition-colors duration-300 shadow-md">Atcelt</button>
+                    <button type="submit" class="px-6 py-3 rounded-md bg-orange-700 text-white hover:bg-orange-800 transition-colors duration-300 shadow-md">Saglabāt Stāstu</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-stone-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0">&copy; 2025 Mana Fanfic Vietne. Visas tiesības aizsargātas.</p>
+            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm">
+                <li><a href="privacy-policy.html" class="hover:text-orange-300 transition-colors duration-300">Konfidencialitātes politika</a></li>
+                <li><a href="terms-of-service.html" class="hover:text-orange-300 transition-colors duration-300">Lietošanas noteikumi</a></li>
+                <li><a href="contact.html" class="hover:text-orange-300 transition-colors duration-300">Kontakti</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Ārējais kopējais JavaScript fails -->
+    <script type="module" src="common.js"></script>
+    <script type="module">
+        // Importēt nepieciešamās Firestore funkcijas, kas nav iekļautas common.js
+        import { doc, getDoc, addDoc, setDoc, updateDoc, onSnapshot, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Šī funkcija tiks izsaukta pēc tam, kad Firebase ir inicializēts un autentifikācijas statuss ir atrisināts (no common.js)
+        window.initializePageContent = async function() {
+            // Form elements
+            const storyForm = document.getElementById('story-form');
+            const storyTitleInput = document.getElementById('story-title');
+            const storyAuthorInput = document.getElementById('story-author');
+            const storyGenreSelect = document.getElementById('story-genre');
+            const newGenreInput = document.getElementById('new-genre-input');
+            const addGenreButton = document.getElementById('add-genre-button');
+            const storySummaryTextarea = document.getElementById('story-summary');
+            const storyContentTextarea = document.getElementById('story-content');
+            const cancelButton = document.getElementById('cancel-button');
+
+            // Modals (modālie logi ir noņemti no HTML, tāpēc šie mainīgie vairs netiek izmantoti)
+            // const successModal = document.getElementById('success-modal');
+            // const closeSuccessModalButton = document.getElementById('close-success-modal');
+            // const errorModal = document.getElementById('error-modal');
+            // const errorMessage = document.getElementById('error-message');
+            // const closeErrorModalButton = document.getElementById('close-error-modal');
+
+            // Set the author field to the current user's ID
+            if (storyAuthorInput) {
+                // Piekļūt userId no globālā tvēruma (common.js)
+                if (window.userId) {
+                    storyAuthorInput.value = window.userId;
+                } else {
+                    storyAuthorInput.value = 'Anonīms Lietotājs';
+                }
+            } else {
+                console.error("Elements ar ID 'story-author' nav atrasts.");
+            }
+
+            // Function to populate genre dropdown from Firestore
+            async function populateGenreDropdown() {
+                // Pārliecinieties, ka db un isAuthReady ir pieejami no globālā tvēruma (common.js)
+                if (!window.db || !window.isAuthReady || !storyGenreSelect) {
+                    console.warn("Firestore, autentifikācijas statuss vai storyGenreSelect nav gatavi žanru aizpildīšanai.");
+                    return;
+                }
+
+                const genres = new Set();
+                // Add default genres
+                genres.add('Fantāzija');
+                genres.add('Romantika');
+                genres.add('Trilleris');
+                genres.add('Zinātniskā fantastika');
+                genres.add('Noslēpums');
+                genres.add('Piedzīvojumi');
+                genres.add('18+ ierobežots');
+
+                try {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                    const storiesCol = collection(window.db, `artifacts/${appId}/public/data/stories`);
+                    const querySnapshot = await getDocs(storiesCol);
+                    querySnapshot.forEach(doc => {
+                        const story = doc.data();
+                        if (story.genre) {
+                            genres.add(story.genre);
+                        }
+                    });
+                } catch (e) {
+                    console.error("Kļūda, ielādējot žanrus no Firestore:", e);
+                }
+
+                // Clear existing options
+                storyGenreSelect.innerHTML = '';
+
+                // Add options to dropdown
+                genres.forEach(genre => {
+                    const option = document.createElement('option');
+                    option.value = genre;
+                    option.textContent = genre;
+                    storyGenreSelect.appendChild(option);
+                });
+            }
+
+            // Initial population of genre dropdown
+            await populateGenreDropdown();
+
+            // Handle adding new genre
+            if (addGenreButton && newGenreInput && storyGenreSelect) {
+                addGenreButton.addEventListener('click', async function() {
+                    const newGenre = newGenreInput.value.trim();
+                    if (newGenre && !Array.from(storyGenreSelect.options).some(option => option.value === newGenre)) {
+                        const option = document.createElement('option');
+                        option.value = newGenre;
+                        option.textContent = newGenre;
+                        storyGenreSelect.appendChild(option);
+                        storyGenreSelect.value = newGenre; // Select the newly added genre
+                        newGenreInput.value = ''; // Clear input
+                    } else if (newGenre) {
+                        // If genre already exists, select it
+                        storyGenreSelect.value = newGenre;
+                        newGenreInput.value = '';
+                    }
+                });
+            } else {
+                console.warn("Pievienot žanru elementi (poga, ievade, atlase) nav atrasti.");
+            }
+
+            // Handle form submission
+            if (storyForm && storyTitleInput && storyGenreSelect && storySummaryTextarea && storyContentTextarea) {
+                storyForm.addEventListener('submit', async function(event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    // Piekļūt db un userId no globālā tvēruma (common.js)
+                    if (!window.db || !window.userId) {
+                        console.error("Datubāze nav gatava vai lietotājs nav autentificēts.");
+                        // Tā kā modālie logi ir noņemti, mēs varam vienkārši izvadīt kļūdu konsolē
+                        return;
+                    }
+
+                    const storyId = new URLSearchParams(window.location.search).get('id');
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                    const storiesCol = collection(window.db, `artifacts/${appId}/public/data/stories`);
+
+                    const newStoryData = {
+                        title: storyTitleInput.value.trim(),
+                        author: window.userId, // Use authenticated userId from global scope
+                        genre: storyGenreSelect.value,
+                        summary: storySummaryTextarea.value.trim(),
+                        content: storyContentTextarea.value.trim(),
+                        wordCount: storyContentTextarea.value.trim().split(/\s+/).filter(word => word.length > 0).length,
+                        createdAt: new Date().toISOString(), // Store creation date
+                        averageRating: 0, // Initialize
+                        totalRatings: 0,  // Initialize
+                        ratings: {} // Initialize as empty map
+                    };
+
+                    try {
+                        if (storyId) {
+                            // Editing existing story
+                            const storyRef = doc(window.db, `artifacts/${appId}/public/data/stories`, storyId);
+                            await updateDoc(storyRef, newStoryData);
+                            console.log("Stāsts atjaunināts ar ID: ", storyId);
+                        } else {
+                            // Adding new story
+                            const docRef = await addDoc(storiesCol, newStoryData);
+                            console.log("Stāsts ierakstīts ar ID: ", docRef.id);
+                        }
+                        // Pēc veiksmīgas saglabāšanas novirzīt uz manu stāstu lapu
+                        window.location.href = 'my-stories.html';
+                    } catch (e) {
+                        console.error("Kļūda, saglabājot stāstu:", e);
+                        // Tā kā modālie logi ir noņemti, mēs varam vienkārši izvadīt kļūdu konsolē
+                    }
+                });
+            } else {
+                console.warn("Stāsta veidlapas elementi nav atrasti.");
+            }
+
+            // Handle Cancel button
+            if (cancelButton) {
+                cancelButton.addEventListener('click', function() {
+                    window.location.href = 'my-stories.html'; // Redirect to my stories page
+                });
+            } else {
+                console.warn("Atcelšanas poga nav atrasta.");
+            }
+
+            // Modālo logu aizvēršanas loģika vairs nav nepieciešama, jo modālie logi ir noņemti
+            // if (closeSuccessModalButton && successModal) {
+            //     closeSuccessModalButton.addEventListener('click', () => {
+            //         successModal.classList.add('hidden');
+            //         window.location.href = 'my-stories.html'; // Redirect after successful save
+            //     });
+            // } else {
+            //     console.warn("Veiksmes modālie elementi nav atrasti.");
+            // }
+
+            // if (closeErrorModalButton && errorModal) {
+            //     closeErrorModalButton.addEventListener('click', () => {
+            //         errorModal.classList.add('hidden');
+            //     });
+            // } else {
+            //     console.warn("Kļūdas modālie elementi nav atrasti.");
+            // }
+
+            // Handle editing existing story
+            const storyIdToEdit = new URLSearchParams(window.location.search).get('id');
+            if (storyIdToEdit) {
+                // Pārliecinieties, ka isAuthReady un db ir pieejami no globālā tvēruma
+                if (window.isAuthReady && window.db && storyTitleInput && storyAuthorInput && storySummaryTextarea && storyContentTextarea && storyGenreSelect) {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                    const storyRef = doc(window.db, `artifacts/${appId}/public/data/stories`, storyIdToEdit);
+                    const storySnap = await getDoc(storyRef);
+
+                    if (storySnap.exists()) {
+                        const storyToEdit = storySnap.data();
+                        storyTitleInput.value = storyToEdit.title;
+                        storyAuthorInput.value = storyToEdit.author;
+                        storySummaryTextarea.value = storyToEdit.summary;
+                        storyContentTextarea.value = storyToEdit.content;
+
+                        // Ensure the genre exists in the dropdown before setting
+                        if (!Array.from(storyGenreSelect.options).some(option => option.value === storyToEdit.genre)) {
+                            const option = document.createElement('option');
+                            option.value = storyToEdit.genre;
+                            option.textContent = storyToEdit.genre;
+                            storyGenreSelect.appendChild(option);
+                        }
+                        storyGenreSelect.value = storyToEdit.genre;
+                        const pageHeading = document.querySelector('h2');
+                        if (pageHeading) {
+                            pageHeading.textContent = 'Rediģēt Stāstu'; // Change page title
+                        }
+                    } else {
+                        console.warn("Stāsts ar ID nav atrasts, apstrādā kā jaunu stāstu.");
+                        const pageHeading = document.querySelector('h2');
+                        if (pageHeading) {
+                            pageHeading.textContent = 'Pievienot Jaunu Stāstu';
+                        }
+                    }
+                } else {
+                    // If auth not ready or elements not found, wait for it. The onAuthStateChanged will call initializePageContent again.
+                    console.log("Autentifikācija nav gatava vai elementi nav atrasti, gaida, lai ielādētu stāstu rediģēšanai.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
